@@ -13,7 +13,7 @@ exports.create = (req, res, next) => {
             var model = {
                 categoryName: req.body.categoryName,
                 categoryDescription: req.body.categoryDescription,
-                catergoryImage: path != "" ? "/" + path : "",
+                categoryImage: path != "" ? "/" + path : "",
             };
 
             categoriesService.createCategory(model, (error, results) => {
@@ -40,7 +40,7 @@ exports.findAll = (req, res, next) => {
 
     };
 
-    categoriesService.getCategory(model, (error, results) => {
+    categoriesService.getCategories(model, (error, results) => {
         if (error) {
             return next(error);
         }

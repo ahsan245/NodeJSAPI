@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-      "version": "1.0.0",
+      "version": "4.6.0",
       "title": "Theek Karo",
       "description": "My Technician Booing App Project Application API",
       "license": {
@@ -24,7 +24,7 @@
       "/api/category": {
         "get": {
           "tags": ["Category"],
-          "summary": "Get all Category",
+          "summary": "Get all Categories",
           "parameters": [
             {
               "name": "categoryName",
@@ -165,7 +165,7 @@
       }
     },
     "definitions": {
-      "Technicians": {
+      "Category": {
         "required": ["categoryName", "_id"],
         "properties": {
           "_id": {
@@ -191,7 +191,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Technicians"
+              "$ref": "#/definitions/Category"
             }
           }
         }

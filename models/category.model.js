@@ -13,7 +13,7 @@ const category = mongoose.model(
             required: false
         },
         categoryImage: {
-            type: String,
+            type: String
         },
     },
         {

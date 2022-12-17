@@ -24,7 +24,7 @@ async function createCategory(params, callback) {
 }
 
 
-async function getCategory(params, callback) {
+async function getCategories(params, callback) {
     const categoryName = params.categoryName;
     var condition = categoryName ? {
         categoryName: { $regex: new RegExp(categoryName), $options: "i" },
@@ -37,17 +37,15 @@ async function getCategory(params, callback) {
 
 
     category
-    .find(condition, "categoryName categoryImage")
-    .limit(perPage)
-    .skip(perPage * page)
-    .then((response) => {
-    
-        return callback(null, response);
+        .find(condition, "categoryName categoryImage")
+        .limit(perPage)
+        .skip(perPage * page)
+        .then((response) => {
+            return callback(null, response);
         })
         .catch((error) => {
             return callback(error);
-        }
-        );
+        });
 
 
 }
@@ -112,7 +110,7 @@ async function deleteCategory(params, callback) {
 
 module.exports = {
     createCategory,
-    getCategory,
+    getCategories,
     getCategoryById,
     updateCategory,
     deleteCategory
