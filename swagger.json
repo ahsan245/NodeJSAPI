@@ -1,0 +1,200 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Theek Karo",
+      "description": "My Technician Booing App Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "127.0.0.1:4000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Category",
+        "description": "Category API"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/api/category": {
+        "get": {
+          "tags": ["Category"],
+          "summary": "Get all Category",
+          "parameters": [
+            {
+              "name": "categoryName",
+              "in": "query",
+              "required": false,
+              "description": "Category Name",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "description": "Page Number",
+              "type": "integer",
+              "default":1
+            },
+            {
+                "name": "pageSize",
+                "in": "query",
+                "required": false,
+                "description": "Page Number",
+                "type": "integer",
+                "default":10
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Category"],
+          "summary": "Create Category API",
+          "parameters": [
+            {
+              "name": "categoryName",
+              "in": "formData",
+              "description": "Category Name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "categoryDescription",
+              "in": "formData",
+              "description": "Category Description",
+              "type": "string"
+            },
+            {
+              "name": "categoryImage",
+              "in": "formData",
+              "description": "Category Image",
+              "required": true,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/category/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Category Id ",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": ["Category"],
+          "summary": "Category Details based on Category Id",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Category"],
+          "summary": "Update Category API",
+          "parameters": [
+            {
+                "name": "categoryName",
+                "in": "formData",
+                "description": "Category Name",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "categoryDescription",
+                "in": "formData",
+                "description": "Category Description",
+                "type": "string"
+              },
+              {
+                "name": "categoryImage",
+                "in": "formData",
+                "description": "Category Image",
+                "required": true,
+                "type": "file"
+              }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Category"],
+          "summary": "Delete Category API",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Technicians": {
+        "required": ["categoryName", "_id"],
+        "properties": {
+          "_id": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "categoryDescription": {
+            "type": "string"
+          },
+          "categoryImage": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Technicians"
+            }
+          }
+        }
+      }
+    }
+  }
