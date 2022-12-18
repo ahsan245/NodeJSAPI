@@ -1,4 +1,5 @@
 const categoryController = require("../controllers/categories.controller");
+const techController = require("../controllers/techs.controller");
 const express = require("express");
 const router = express.Router();
 
@@ -7,5 +8,13 @@ router.get("/category", categoryController.findAll);
 router.get("/category/:id", categoryController.findOne);
 router.put("/category/:id", categoryController.update);
 router.delete("/category/:id", categoryController.delete);
+
+
+
+router.post("/tech", techController.create);
+router.get("/tech", techController.findAll);
+router.get("/tech/:id", techController.findOne);
+router.put("/tech/:id", techController.update);
+router.delete("/tech/:id", techController.delete);
 
 module.exports = router;
