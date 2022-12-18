@@ -44,7 +44,8 @@ exports.findAll = (req, res, next) => {
         techName: req.query.techName,
         categoryId: req.query.categoryId,
         pageSize: req.query.pageSize,
-        page: req.query.page
+        page: req.query.page,
+        sort:req.query.sort
     };
 
     techServices.getTechs(model, (error, results) => {

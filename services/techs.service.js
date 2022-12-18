@@ -48,7 +48,8 @@ async function getTechs(params, callback) {
     let page = (Math.abs(params.page) || 1) - 1;
 
     tech
-        .find(condition, "techId techName techShortDescription techPrice techSalePrice techImage techType techStatus")
+        .find(condition, "techId techName techShortDescription techPrice techSalePrice techImage techType techStatus createdAT updatedAt")
+        .sort(params.sort)
         .populate("category", "categoryName categoryImage")
         .limit(perPage)
         .skip(perPage * page)
