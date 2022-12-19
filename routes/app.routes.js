@@ -1,5 +1,6 @@
 const categoryController = require("../controllers/categories.controller");
 const techController = require("../controllers/techs.controller");
+const userController = require("../controllers/users.controller");
 const express = require("express");
 const router = express.Router();
 
@@ -16,5 +17,9 @@ router.get("/tech", techController.findAll);
 router.get("/tech/:id", techController.findOne);
 router.put("/tech/:id", techController.update);
 router.delete("/tech/:id", techController.delete);
+
+
+router.post("/register", userController.register);
+router.post("/login", userController.login);
 
 module.exports = router;

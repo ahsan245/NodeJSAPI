@@ -15,12 +15,75 @@
       {
         "name": "Category",
         "description": "Category API"
+      },
+      {
+        "name": "Users",
+        "description": "Users API"
       }
     ],
     "schemes": ["http"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "paths": {
+
+      "/api/register":{
+        "post":{
+          "tags":["Users"],
+          "summary":["Register API"],
+          "parameters":[
+            {
+              "name":"RegisterModel",
+              "in":"body",
+              "description" :"User Registeration",
+              "required" :true,
+              "type" :"object",
+              "schema":{
+                "$ref":"#/definitions/RegisterModel"
+              }
+            
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"OK",
+              "schema":{
+                "$ref":"#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+
+      },
+      "/api/login":{
+        "post":{
+          "tags":["Users"],
+          "summary":["Login API"],
+          "parameters":[
+            {
+              "name":"LoginModel",
+              "in":"body",
+              "description" :"User Login API",
+              "required" :true,
+              "type" :"object",
+              "schema":{
+                "$ref":"#/definitions/LoginModel"
+              }
+            
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"OK",
+              "schema":{
+                "$ref":"#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+
+      },
+    
+
       "/api/category": {
         "get": {
           "tags": ["Category"],
@@ -165,6 +228,7 @@
       }
     },
     "definitions": {
+      
       "Category": {
         "required": ["categoryName", "_id"],
         "properties": {
@@ -195,6 +259,43 @@
             }
           }
         }
+      },
+      "RegisterModel":{
+        "required":[
+          "fullName",
+          "email",
+          "password"
+        ],
+        "properties":{
+          "fullName":{
+            "type":"string"
+          },
+          "email":{
+            "type":"string"
+          },
+          "password":{
+            "type":"string"
+          }
+        }
+
+      },
+
+      "LoginModel":{
+        "required":[
+          "email",
+          "password"
+        ],
+        "properties":{
+          "email":{
+            "type":"string"
+          },
+          "password":{
+            "type":"string"
+          }
+        }
+
       }
+
+
     }
   }
