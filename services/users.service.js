@@ -8,7 +8,7 @@ async function login({ email, password }, callback) {
     if (userModel != null) {
         if (bcrypt.compareSync(password, userModel.password)) {
             const token = auth.generateAccessToken(userModel.toJSON());
-            return callback(null, { ...userModel.toJSON(), token });
+            return callback(null, {...userModel.toJSON(), token });
         } else {
             return callback({
                 message: "Invalid Email/Password"
@@ -32,7 +32,7 @@ async function register(params, callback) {
 
     if (isUserExist) {
         return callback({
-            message: "Email is already rregisterd"
+            message: "Email is already registered"
         });
     }
 
@@ -50,6 +50,6 @@ async function register(params, callback) {
 }
 
 module.exports = {
-   login,
-   register,
+    login,
+    register,
 };

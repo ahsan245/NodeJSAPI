@@ -25,7 +25,6 @@
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "paths": {
-
       "/api/register":{
         "post":{
           "tags":["Users"],
@@ -293,9 +292,6 @@
             "type":"string"
           }
         }
-
       }
-
-
     }
   }
