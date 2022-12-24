@@ -2,6 +2,7 @@ const categoryController = require("../controllers/categories.controller");
 const techController = require("../controllers/techs.controller");
 const userController = require("../controllers/users.controller");
 const sliderController = require("../controllers/slider.controller");
+const relatedTechController = require("../controllers/related-tech.controller");
 
 const express = require("express");
 const { slider } = require("../models/slider.model");
@@ -26,6 +27,10 @@ router.get("/slider", sliderController.findAll);
 router.get("/slider/:id", sliderController.findOne);
 router.put("/slider/:id", sliderController.update);
 router.delete("/slider/:id", sliderController.delete);
+
+router.post("/relatedTech", relatedTechController.create);
+router.delete("/relatedTech/:id", relatedTechController.delete);
+
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);

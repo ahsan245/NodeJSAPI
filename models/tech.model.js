@@ -1,4 +1,4 @@
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 
 const tech = mongoose.model(
     "Tech",
@@ -33,24 +33,34 @@ const tech = mongoose.model(
             techImage: {
                 type: String
             },
-            techType:{
+            techType: {
                 type: String,
                 required: true,
-                default:"Both"
+                default: "Both"
             },
             techStatus: {
                 type: String,
                 default: "IN"
-            }
-        }, {
-        toJSON: {
-            transform: function (doc, ret) {
-                ret.techId = ret._id.toString();
-                delete ret._id;
-                delete ret.__v;
-            }
-        }    
-    })
+            },
+            relatedTechs:
+                [
+                    {
+
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "RelatedTech"
+                    }
+                ]
+        }, 
+    //     {
+    //     toJSON: {
+    //         transform: function (doc, ret) {
+    //             ret.techId = ret._id.toString();
+    //             delete ret._id;
+    //             delete ret.__v;
+    //         }
+    //     }
+    // }
+    )
 );
 
 module.exports = {

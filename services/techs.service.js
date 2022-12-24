@@ -3,6 +3,7 @@ const { category } = require("../models/category.model");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
 
 
+
 async function createTech(params, callback) {
     if (!params.techName) {
         return callback(
@@ -43,6 +44,11 @@ async function getTechs(params, callback) {
     if (categoryId) {
         condition["category"] = categoryId;
     }
+    if(params.techIds){
+        condition["_id"] = {
+            $in: params.techIds.split(",")
+        };
+    }
 
     let perPage = Math.abs(params.pageSize) || MONGO_DB_CONFIG.PAGE_SIZE;
     let page = (Math.abs(params.page) || 1) - 1;
@@ -51,10 +57,21 @@ async function getTechs(params, callback) {
         .find(condition, "techId techName techShortDescription techPrice techSalePrice techImage techType techStatus createdAT updatedAt")
         .sort(params.sort)
         .populate("category", "categoryName categoryImage")
+        .populate("relatedTechs", "relatedTech")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
-            return callback(null, response);
+
+            var res = response.map(r => {
+                if (r.relatedTechs.length > 0) {
+                    r.relatedTechs = r.relatedTechs.map(x => x.relatedTech);
+                }
+                return r;
+            });
+
+
+
+            return callback(null, res);
         })
         .catch((error) => {
             return callback(error);
@@ -70,7 +87,11 @@ async function getTechById(params, callback) {
     tech
         .findById(techId)
         .populate("category", "categoryName categoryImage")
+        .populate("relatedTechs", "relatedTech")
+
         .then((response) => {
+            response.relatedTechs = response.relatedTechs.map(x =>{return x.relatedTech});
+
             return callback(null, response);
         })
         .catch((error) => {
