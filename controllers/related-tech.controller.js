@@ -14,18 +14,18 @@ exports.create = (req, res, next) => {
     })
 };
 
-exports.delete = (req,res,next) =>{
+exports.delete = (req, res, next) => {
     var model = {
-        id:req.params.id,
+        id: req.params.id,
     };
-    relatedTechServices.removeRelatedTech(model,(error,results) => {
-        if(error){
+    relatedTechServices.removeRelatedTech(model, (error, results) => {
+        if (error) {
             return next(error);
         }
         else {
             return res.status(200).send({
-                message:"Success",
-                data:results
+                message: "Success",
+                data: results
             })
         }
     })

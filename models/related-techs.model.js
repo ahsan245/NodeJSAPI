@@ -13,18 +13,19 @@ const relatedTech = mongoose.model(
                 ref: "Tech"
             }
         },
-        // {
-        //     toJSON:{
-        //         transform: function(doc,ret){
-        //             delete ret._id;
-        //             delete ret.__v;
-        //         }
-        //     },
-        //     timestamps: true
-        // }
+        {
+            toJSON:{
+                transform: function(doc,ret){
+                    delete ret._id;
+                    delete ret.__v;
+                }
+            },
+        }, {
+            timestamps: true
+        })
         
     )
-);
+
 module.exports = {
     relatedTech,
 }
