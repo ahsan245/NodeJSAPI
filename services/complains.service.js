@@ -54,7 +54,7 @@ async function getComplain(params, callback) {
 
 
     complain
-        .find(condition, "complainName complainDescription complainCategory userAddress userContact complainImage")
+        .find(condition, "complainName complainDescription complainCategory assignedTech userAddress userContact complainImage")
         .populate("user", "userId fullName")
         .limit(perPage)
         .skip(perPage * page)

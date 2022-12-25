@@ -19,6 +19,10 @@ const complain = mongoose.model(
             type:String,
             required:false
         },
+        assignedTech:{
+            type:String,
+            required:false
+        },
         userAddress:{
             type:String,
             required:true
