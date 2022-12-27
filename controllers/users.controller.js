@@ -53,3 +53,23 @@ exports.findAll = (req, res, next) => {
         }
     });
 };
+
+exports.findOne = (req, res, next) => {
+    var model = {
+        userId: req.params.id,
+    };
+
+    userServices.getUserbyId(model, (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            return res.status(200).send({
+                messege: "Success",
+                data: results,
+            });
+        }
+
+    });
+
+};

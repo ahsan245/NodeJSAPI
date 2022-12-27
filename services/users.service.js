@@ -74,8 +74,25 @@ async function getUsers(params, callback) {
 
 }
 
+async function getUserbyId(params, callback) {
+    const userId = params.userId;
+
+    user
+        .findById(userId)
+        .then((response) => {
+            if (!response) callback("Not Found User with Id" + userId)
+            else callback(null, response);
+        })
+        .catch((error) => {
+            return callback(error);
+        }
+        );
+}
+
+
 module.exports = {
     login,
     register,
     getUsers,
+    getUserbyId
 };
