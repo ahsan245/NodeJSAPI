@@ -30,3 +30,26 @@ exports.login = (req, res, next) => {
     }
     });
 };
+
+
+exports.findAll = (req, res, next) => {
+
+    var model = {
+        fullName: req.query.fullName,
+        pageSize: req.query.pageSize,
+        page: req.query.page,
+
+    };
+
+    userServices.getUsers(model, (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            return res.status(200).send({
+                messege: "Success",
+                data: results,
+            });
+        }
+    });
+};

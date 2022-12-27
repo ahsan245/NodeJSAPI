@@ -1,6 +1,8 @@
 const { user } = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
+const { MONGO_DB_CONFIG } = require("../config/app.config");
+
 
 async function login({ email, password }, callback) {
     const userModel = await user.findOne({ email });
@@ -48,8 +50,32 @@ async function register(params, callback) {
             return callback(error);
         });
 }
+async function getUsers(params, callback) {
+    const fullName = params.fullName;
+    var condition = fullName ? { fullName: { $regex: new RegExp(fullName), $options: "i" } }
+
+        : {};
+
+    let perPage = Math.abs(params.pageSize) || MONGO_DB_CONFIG.pageSize;
+    let page = (Math.abs(params.page) || 1) - 1;
+
+    user
+        .find(condition, "fullName email")
+        .limit(perPage).skip(perPage * page)
+        .then((response) => {
+            return callback(null, response);
+        })
+        .catch((error) => {
+            return callback(error);
+        });
+
+
+
+
+}
 
 module.exports = {
     login,
     register,
+    getUsers,
 };
