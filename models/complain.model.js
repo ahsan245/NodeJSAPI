@@ -33,7 +33,7 @@ const complain = mongoose.model(
         },
         complainImage: {
             type: String,
-            required:true
+            required:false
         }
     },
         {

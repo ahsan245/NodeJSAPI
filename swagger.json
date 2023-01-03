@@ -19,12 +19,17 @@
       {
         "name": "Users",
         "description": "Users API"
+      },
+      {
+        "name": "Technicians",
+        "description": "Technician API"
       }
     ],
     "schemes": ["http"],
     "consumes": ["application/json"],
     "produces": ["application/json"],
     "paths": {
+      
       "/api/register":{
         "post":{
           "tags":["Users"],
@@ -80,6 +85,214 @@
           }
         }
 
+      },
+      "/api/tech": {
+        "get": {
+          "tags": ["Technicians"],
+          "summary": "Get all Technicians",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "query",
+              "required": false,
+              "description": "Technician Name",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "description": "Page Number",
+              "type": "integer",
+              "default":1
+            },
+            {
+                "name": "pageSize",
+                "in": "query",
+                "required": false,
+                "description": "Page Number",
+                "type": "integer",
+                "default":10
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Technicians"],
+          "summary": "Create Technicians API",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "formData",
+              "description": "Tech Name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "category",
+              "in": "formData",
+              "description": "Category ID",
+              "required": true,
+              "type": "string"
+            },
+            
+            {
+              "name": "techShortDescription",
+              "in": "formData",
+              "description": "Tech  Short Description",
+              "type": "string"
+            },
+            {
+              "name": "techDescription",
+              "in": "formData",
+              "description": "Tech Description",
+              "type": "string"
+            },
+            {
+              "name": "techPrice",
+              "in": "formData",
+              "description": "Tech Price",
+              "type": "string"
+            },
+            {
+              "name": "techType",
+              "in": "formData",
+              "description": "Tech Type",
+              "type": "string"
+            },
+            {
+              "name": "techStatus",
+              "in": "formData",
+              "description": "Tech Status",
+              "type": "string"
+            },
+
+            {
+              "name": "techImage",
+              "in": "formData",
+              "description": "Tech Image",
+              "required": true,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        }
+      },
+      "/api/tech/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Tech Id ",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": ["Technicians"],
+          "summary": "Tech Details based on Tech Id",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Technicians"],
+          "summary": "Update Tech API",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "formData",
+              "description": "Tech Name",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "category",
+              "in": "formData",
+              "description": "Category ID",
+              "required": false,
+              "type": "string"
+            },
+            
+            {
+              "name": "techShortDescription",
+              "in": "formData",
+              "description": "Tech  Short Description",
+              "type": "string"
+            },
+            {
+              "name": "techDescription",
+              "in": "formData",
+              "description": "Tech Description",
+              "type": "string"
+            },
+            {
+              "name": "techPrice",
+              "in": "formData",
+              "description": "Tech Price",
+              "type": "string"
+            },
+            {
+              "name": "techType",
+              "in": "formData",
+              "description": "Tech Type",
+              "type": "string"
+            },
+            {
+              "name": "techStatus",
+              "in": "formData",
+              "description": "Tech Status",
+              "type": "string"
+            },
+
+            {
+              "name": "techImage",
+              "in": "formData",
+              "description": "Tech Image",
+              "required": false,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Technicians"],
+          "summary": "Delete Tech API",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        }
       },
     
 
@@ -227,6 +440,7 @@
       }
     },
     "definitions": {
+
       
       "Category": {
         "required": ["categoryName", "_id"],
@@ -255,6 +469,52 @@
             "type": "array",
             "items": {
               "$ref": "#/definitions/Category"
+            }
+          }
+        }
+      },
+      "Tech": {
+        "required": ["techId"],
+        "properties": {
+          "techId": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "techName": {
+            "type": "string"
+          },
+          "techShortDescription": {
+            "type": "string"
+          },
+          "techDescription": {
+            "type": "string"
+          },
+          "techImage": {
+            "type": "string"
+          },
+          "techType": {
+            "type": "string"
+          },
+          "techPrice": {
+            "type": "string"
+          },
+          "techSalePrice": {
+            "type": "string"
+          },
+          "techStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceResponses": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Tech"
             }
           }
         }

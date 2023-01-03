@@ -11,8 +11,8 @@ exports.create = (req, res, next) => {
                 req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
             var model = {
-                complainName: req.body.complainName,
                 user:req.body.user,
+                complainName: req.body.complainName,
                 complainDescription: req.body.complainDescription,
                 complainCategory:req.body.complainCategory,
                 assignedTech:req.body.assignedTech,
