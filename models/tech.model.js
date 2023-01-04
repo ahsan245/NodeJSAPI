@@ -39,8 +39,8 @@ const tech = mongoose.model(
                 default: "Both"
             },
             techStatus: {
-                type: String,
-                default: "IN"
+                type: Boolean,
+                default: true
             },
             relatedTechs:
                 [

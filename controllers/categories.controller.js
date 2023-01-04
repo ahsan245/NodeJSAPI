@@ -53,6 +53,18 @@ exports.findAll = (req, res, next) => {
     });
 };
 
+exports.countAll = (req, res, next) => {
+    categoriesService.getCategoriesCount((error, count) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.status(200).send({
+            messege: "Success",
+          count: count,
+        });
+      }
+    });
+  };
 
 exports.findOne = (req, res, next) => {
     var model = {

@@ -86,7 +86,30 @@ exports.findOne = (req, res, next) => {
 
     });
 }
-
+exports.countAll = (req, res, next) => {
+    techServices.getTechCount((error, count) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.status(200).send({
+            messege: "Success",
+          count: count,
+        });
+      }
+    });
+  };
+  exports.countTechs = (req, res, next) => {
+    techServices.countTechs((error, results) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.status(200).send({
+          messege: "Success",
+          data: results,
+        });
+      }
+    });
+  };
 
 
 exports.update = (req, res, next) => {
@@ -107,7 +130,7 @@ exports.update = (req, res, next) => {
                 techPrice: req.body.techPrice,
                 techSalePrice: req.body.techSalePrice,
                 techType: req.body.techType,
-                techStatus: req.body.stockStatus,
+                techStatus: req.body.techStatus,
                 techImage: path != "" ? "/" + path : ""
 
             }

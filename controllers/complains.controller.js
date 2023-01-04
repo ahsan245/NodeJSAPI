@@ -59,8 +59,31 @@ exports.findAll = (req, res, next) => {
         }
     });
 };
+exports.countAll = (req, res, next) => {
+    complainService.getComplainCount((error, count) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.status(200).send({
+            messege: "Success",
+          count: count,
+        });
+      }
+    });
+  };
 
-
+  exports.countComplain = (req, res, next) => {
+    complainService.countComplain((error, results) => {
+      if (error) {
+        return next(error);
+      } else {
+        return res.status(200).send({
+          messege: "Success",
+          data: results,
+        });
+      }
+    });
+  };
 exports.findOne = (req, res, next) => {
     var model = {
         complainId: req.params.id,
@@ -97,6 +120,7 @@ exports.update = (req, res, next) => {
                 assignedTech:req.body.assignedTech,
                 userAddress:req.body.userAddress,
                 userContact:req.body.userContact,
+                complainStatus:req.body.complainStatus,
                 complainImage: path != "" ? "/" + path : "",
             };
 

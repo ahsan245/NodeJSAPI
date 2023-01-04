@@ -79,7 +79,23 @@ async function getTechs(params, callback) {
 
 
 }
-
+async function getTechCount(callback) {
+    tech.countDocuments().then((count) => {
+      return callback(null, count);
+    }).catch((error) => {
+      return callback(error);
+    });
+  }
+  async function countTechs(callback) {
+    // create a condition to filter techs with a techStatus of true
+    const condition = { techStatus: true };
+  
+    tech.countDocuments(condition).then((count) => {
+      return callback(null, count);
+    }).catch((error) => {
+      return callback(error);
+    });
+  }
 
 async function getTechById(params, callback) {
     const techId = params.techId;
@@ -103,21 +119,27 @@ async function getTechById(params, callback) {
 
 async function updateTech(params, callback) {
     const techId = params.techId;
-
+  
+    // check if the techStatus field is present in the params object
+    if (params.techStatus !== undefined) {
+      // if the techStatus field is present, convert its value to a boolean
+      params.techStatus = !!params.techStatus;
+    }
+  
     tech
-        .findByIdAndUpdate(techId, params, { useFindAndModify: false })
-        .then((response) => {
-            if (!response) {
-                callback(`Cannot update Tech with id ${techId}`)
-            }
-
-            else callback(null, response);
-        })
-        .catch((error) => {
-            return callback(error);
-        });
-}
-
+      .findByIdAndUpdate(techId, params, { useFindAndModify: false })
+      .then((response) => {
+        if (!response) {
+          callback(`Cannot update Tech with id ${techId}`);
+        } else {
+          callback(null, response);
+        }
+      })
+      .catch((error) => {
+        return callback(error);
+      });
+  }
+  
 
 async function deleteTech(params, callback) {
     const techId = params.techId;
@@ -142,5 +164,7 @@ module.exports = {
     getTechs,
     getTechById,
     updateTech,
-    deleteTech
+    deleteTech,
+    getTechCount,
+    countTechs
 };

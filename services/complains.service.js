@@ -54,7 +54,7 @@ async function getComplain(params, callback) {
 
 
     complain
-        .find(condition, "complainName complainDescription complainCategory assignedTech userAddress userContact complainImage")
+        .find(condition, "complainStatus complainName complainDescription complainCategory assignedTech userAddress userContact complainImage")
         .populate("user", "userId fullName")
         .limit(perPage)
         .skip(perPage * page)
@@ -88,12 +88,32 @@ async function getComplainById(params, callback) {
 
 
 }
+async function getComplainCount(callback) {
+    complain.countDocuments().then((count) => {
+      return callback(null, count);
+    }).catch((error) => {
+      return callback(error);
+    });
+  }
 
-
+  async function countComplain(callback) {
+    // create a condition to filter techs with a techStatus of true
+    const condition = { complainStatus: true };
+  
+    complain.countDocuments(condition).then((count) => {
+      return callback(null, count);
+    }).catch((error) => {
+      return callback(error);
+    });
+  }
 
 async function updateComplain(params, callback) {
     const complainId = params.complainId;
 
+    if (params.complainStatus !== undefined) {
+        // if the techStatus field is present, convert its value to a boolean
+        params.complainStatus = !!params.complainStatus;
+      }
     complain
         .findByIdAndUpdate(complainId, params, { useFindAndModify: false })
         .then((response) => {
@@ -133,5 +153,7 @@ module.exports = {
     getComplain,
     getComplainById,
     updateComplain,
-    deleteComplain
+    deleteComplain,
+    getComplainCount,
+    countComplain
 };

@@ -11,14 +11,18 @@ const router = express.Router();
 
 router.post("/category", categoryController.create);
 router.get("/category", categoryController.findAll);
+router.get("/category/count", categoryController.countAll);
 router.get("/category/:id", categoryController.findOne);
 router.put("/category/:id", categoryController.update);
 router.delete("/category/:id", categoryController.delete);
 
 
 
+
 router.post("/tech", techController.create);
 router.get("/tech", techController.findAll);
+router.get("/tech/count", techController.countAll);
+router.get("/tech/activecount", techController.countTechs);
 router.get("/tech/:id", techController.findOne);
 router.put("/tech/:id", techController.update);
 router.delete("/tech/:id", techController.delete);
@@ -34,6 +38,8 @@ router.delete("/relatedTech/:id", relatedTechController.delete);
 
 router.post("/complain", complainController.create);
 router.get("/complain", complainController.findAll);
+router.get("/complain/activecount", complainController.countComplain);
+router.get("/complain/count", complainController.countAll);
 router.get("/complain/:id", complainController.findOne);
 router.put("/complain/:id", complainController.update);
 router.delete("/complain/:id", complainController.delete);

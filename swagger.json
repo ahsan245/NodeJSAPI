@@ -171,7 +171,8 @@
               "name": "techStatus",
               "in": "formData",
               "description": "Tech Status",
-              "type": "string"
+              "type": "boolean",
+              "example":true
             },
 
             {
@@ -261,7 +262,8 @@
               "name": "techStatus",
               "in": "formData",
               "description": "Tech Status",
-              "type": "string"
+              "type": "boolean",
+              "example": true
             },
 
             {
@@ -502,7 +504,8 @@
             "type": "string"
           },
           "techStatus": {
-            "type": "string"
+            "type": "boolean",
+            "example": true
           }
         }
       },

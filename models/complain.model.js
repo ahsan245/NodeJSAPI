@@ -27,6 +27,10 @@ const complain = mongoose.model(
             type:String,
             required:true
         },
+        complainStatus: {
+            type: Boolean,
+            default: true
+        },
         userContact:{
             type:String,
             required:true
