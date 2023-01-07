@@ -1,0 +1,560 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "4.6.0",
+      "title": "Theek Karo",
+      "description": "My Technician Booing App Project Application API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "127.0.0.1:4000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Category",
+        "description": "Category API"
+      },
+      {
+        "name": "Users",
+        "description": "Users API"
+      },
+      {
+        "name": "Technicians",
+        "description": "Technician API"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      
+      "/api/register":{
+        "post":{
+          "tags":["Users"],
+          "summary":["Register API"],
+          "parameters":[
+            {
+              "name":"RegisterModel",
+              "in":"body",
+              "description" :"User Registeration",
+              "required" :true,
+              "type" :"object",
+              "schema":{
+                "$ref":"#/definitions/RegisterModel"
+              }
+            
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"OK",
+              "schema":{
+                "$ref":"#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+
+      },
+      "/api/login":{
+        "post":{
+          "tags":["Users"],
+          "summary":["Login API"],
+          "parameters":[
+            {
+              "name":"LoginModel",
+              "in":"body",
+              "description" :"User Login API",
+              "required" :true,
+              "type" :"object",
+              "schema":{
+                "$ref":"#/definitions/LoginModel"
+              }
+            
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"OK",
+              "schema":{
+                "$ref":"#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+
+      },
+      "/api/tech": {
+        "get": {
+          "tags": ["Technicians"],
+          "summary": "Get all Technicians",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "query",
+              "required": false,
+              "description": "Technician Name",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "description": "Page Number",
+              "type": "integer",
+              "default":1
+            },
+            {
+                "name": "pageSize",
+                "in": "query",
+                "required": false,
+                "description": "Page Number",
+                "type": "integer",
+                "default":10
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Technicians"],
+          "summary": "Create Technicians API",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "formData",
+              "description": "Tech Name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "category",
+              "in": "formData",
+              "description": "Category ID",
+              "required": true,
+              "type": "string"
+            },
+            
+            {
+              "name": "techShortDescription",
+              "in": "formData",
+              "description": "Tech  Short Description",
+              "type": "string"
+            },
+            {
+              "name": "techDescription",
+              "in": "formData",
+              "description": "Tech Description",
+              "type": "string"
+            },
+            {
+              "name": "techPrice",
+              "in": "formData",
+              "description": "Tech Price",
+              "type": "string"
+            },
+            {
+              "name": "techType",
+              "in": "formData",
+              "description": "Tech Type",
+              "type": "string"
+            },
+            {
+              "name": "techStatus",
+              "in": "formData",
+              "description": "Tech Status",
+              "type": "boolean",
+              "example":true
+            },
+
+            {
+              "name": "techImage",
+              "in": "formData",
+              "description": "Tech Image",
+              "required": true,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        }
+      },
+      "/api/tech/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Tech Id ",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": ["Technicians"],
+          "summary": "Tech Details based on Tech Id",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Technicians"],
+          "summary": "Update Tech API",
+          "parameters": [
+            {
+              "name": "techName",
+              "in": "formData",
+              "description": "Tech Name",
+              "required": false,
+              "type": "string"
+            },
+            {
+              "name": "category",
+              "in": "formData",
+              "description": "Category ID",
+              "required": false,
+              "type": "string"
+            },
+            
+            {
+              "name": "techShortDescription",
+              "in": "formData",
+              "description": "Tech  Short Description",
+              "type": "string"
+            },
+            {
+              "name": "techDescription",
+              "in": "formData",
+              "description": "Tech Description",
+              "type": "string"
+            },
+            {
+              "name": "techPrice",
+              "in": "formData",
+              "description": "Tech Price",
+              "type": "string"
+            },
+            {
+              "name": "techType",
+              "in": "formData",
+              "description": "Tech Type",
+              "type": "string"
+            },
+            {
+              "name": "techStatus",
+              "in": "formData",
+              "description": "Tech Status",
+              "type": "boolean",
+              "example": true
+            },
+
+            {
+              "name": "techImage",
+              "in": "formData",
+              "description": "Tech Image",
+              "required": false,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Technicians"],
+          "summary": "Delete Tech API",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponses"
+              }
+            }
+          }
+        }
+      },
+    
+
+      "/api/category": {
+        "get": {
+          "tags": ["Category"],
+          "summary": "Get all Categories",
+          "parameters": [
+            {
+              "name": "categoryName",
+              "in": "query",
+              "required": false,
+              "description": "Category Name",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "description": "Page Number",
+              "type": "integer",
+              "default":1
+            },
+            {
+                "name": "pageSize",
+                "in": "query",
+                "required": false,
+                "description": "Page Number",
+                "type": "integer",
+                "default":10
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Category"],
+          "summary": "Create Category API",
+          "parameters": [
+            {
+              "name": "categoryName",
+              "in": "formData",
+              "description": "Category Name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "categoryDescription",
+              "in": "formData",
+              "description": "Category Description",
+              "type": "string"
+            },
+            {
+              "name": "categoryImage",
+              "in": "formData",
+              "description": "Category Image",
+              "required": true,
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+      },
+      "/api/category/{id}": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Category Id ",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": ["Category"],
+          "summary": "Category Details based on Category Id",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": ["Category"],
+          "summary": "Update Category API",
+          "parameters": [
+            {
+                "name": "categoryName",
+                "in": "formData",
+                "description": "Category Name",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "categoryDescription",
+                "in": "formData",
+                "description": "Category Description",
+                "type": "string"
+              },
+              {
+                "name": "categoryImage",
+                "in": "formData",
+                "description": "Category Image",
+                "required": true,
+                "type": "file"
+              }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Category"],
+          "summary": "Delete Category API",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ServiceResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+
+      
+      "Category": {
+        "required": ["categoryName", "_id"],
+        "properties": {
+          "_id": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "categoryDescription": {
+            "type": "string"
+          },
+          "categoryImage": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        }
+      },
+      "Tech": {
+        "required": ["techId"],
+        "properties": {
+          "techId": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "techName": {
+            "type": "string"
+          },
+          "techShortDescription": {
+            "type": "string"
+          },
+          "techDescription": {
+            "type": "string"
+          },
+          "techImage": {
+            "type": "string"
+          },
+          "techType": {
+            "type": "string"
+          },
+          "techPrice": {
+            "type": "string"
+          },
+          "techSalePrice": {
+            "type": "string"
+          },
+          "techStatus": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "ServiceResponses": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Tech"
+            }
+          }
+        }
+      },
+      "RegisterModel":{
+        "required":[
+          "fullName",
+          "email",
+          "password"
+        ],
+        "properties":{
+          "fullName":{
+            "type":"string"
+          },
+          "email":{
+            "type":"string"
+          },
+          "password":{
+            "type":"string"
+          }
+        }
+
+      },
+
+      "LoginModel":{
+        "required":[
+          "email",
+          "password"
+        ],
+        "properties":{
+          "email":{
+            "type":"string"
+          },
+          "password":{
+            "type":"string"
+          }
+        }
+      }
+    }
+  }
