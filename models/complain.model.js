@@ -19,9 +19,10 @@ const complain = mongoose.model(
             type:String,
             required:false
         },
-        assignedTech:{
-            type:String,
-            required:false
+        assignedTech: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Tech",
+            required: false
         },
         userAddress:{
             type:String,
@@ -29,7 +30,7 @@ const complain = mongoose.model(
         },
         complainStatus: {
             type: Boolean,
-            default: true
+            default: false  
         },
         userContact:{
             type:String,

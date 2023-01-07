@@ -54,19 +54,25 @@ async function getComplain(params, callback) {
 
 
     complain
-        .find(condition, "complainStatus complainName complainDescription complainCategory assignedTech userAddress userContact complainImage")
+        .find(condition, "complainStatus complainName complainDescription complainCategory userAddress userContact complainImage")
         .populate("user", "userId fullName")
+        .populate("assignedTech", "techId techName")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
-            return callback(null, response);
-        })
-        .catch((error) => {
-            return callback(error);
-        });
-
-
-}
+            response.forEach(complain => {
+                if (!complain.assignedTech || complain.assignedTech === "") {
+                  complain.complainStatus = false;
+                } else {
+                  complain.complainStatus = true;
+                }
+              });
+              return callback(null, response);
+            })
+            .catch((error) => {
+              return callback(error);
+            });
+        }
 
 
 
@@ -76,6 +82,7 @@ async function getComplainById(params, callback) {
     complain
         .findById(complainId)
         .populate("user", "userId")
+        .populate("assignedTech", "techId techName")
         .then((response) => {
             
             if (!response) callback("Not Found complain with Id" + complainId)

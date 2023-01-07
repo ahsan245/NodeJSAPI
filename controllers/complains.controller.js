@@ -36,11 +36,14 @@ exports.create = (req, res, next) => {
         }
     });
 };
+
+
 exports.findAll = (req, res, next) => {
 
     var model = {
         complainName: req.query.complainName,
         userId:req.query.userId,
+        assignedTech:req.query.assignedTech,
         pageSize: req.query.pageSize,
         page: req.query.page,
         
