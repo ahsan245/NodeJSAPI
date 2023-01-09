@@ -35,7 +35,7 @@ const tech = mongoose.model(
             },
             techType: {
                 type: String,
-                required: true,
+                required: false,
                 default: "Both"
             },
             techStatus: {
