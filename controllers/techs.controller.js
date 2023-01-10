@@ -64,22 +64,6 @@ exports.findAll = (req, res, next) => {
     });
 }
 
-exports.find = ( req, res) => {
-   
-    techServices.getAllTechs((error, results) => {
-        if (error) {
-            return error;
-        }
-        else {
-            return res.status(200).send({
-                message: "Success",
-                data: results
-            });
-        }
-
-
-    });
-}
 
 
 exports.findOne = (req, res, next) => {

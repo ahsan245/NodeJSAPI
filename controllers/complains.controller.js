@@ -11,9 +11,8 @@ exports.create = (req, res, next) => {
             const path =
                 req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
             
-            let techniciantoAssign = await complainService.RoundRobinAlgorithm();           
-            console.log(techniciantoAssign);
-            
+            let techniciantoAssign = await complainService.RoundRobinAlgorithm();
+
             var model = {
                 user:req.body.user,
                 complainName: req.body.complainName,

@@ -21,7 +21,6 @@ router.delete("/category/:id", categoryController.delete);
 
 router.post("/tech", techController.create);
 router.get("/tech", techController.findAll);
-router.get("/techs", techController.find);
 router.get("/tech/count", techController.countAll);
 router.get("/tech/activecount", techController.countTechs);
 router.get("/tech/:id", techController.findOne);
