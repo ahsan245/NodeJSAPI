@@ -158,6 +158,25 @@ async function deleteTech(params, callback) {
         });
 }
 
+async function getAllTechs()
+{
+    // tech.find({})
+    // .then((response) => {
+    //     if (response) {
+    //         console.log("techagae",response);
+    //         return response;
+    //     }
+    //     else
+    //     {
+    //         return null;
+    //     }
+    // })
+    // .catch((error) => {
+    //     console.log(error);
+    //     return error;
+    // });
+    return tech.find({});
+}
 
 module.exports = {
     createTech,
@@ -166,5 +185,6 @@ module.exports = {
     updateTech,
     deleteTech,
     getTechCount,
-    countTechs
+    countTechs,
+    getAllTechs
 };

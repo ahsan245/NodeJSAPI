@@ -21,6 +21,7 @@ router.delete("/category/:id", categoryController.delete);
 
 router.post("/tech", techController.create);
 router.get("/tech", techController.findAll);
+router.get("/techs", techController.find);
 router.get("/tech/count", techController.countAll);
 router.get("/tech/activecount", techController.countTechs);
 router.get("/tech/:id", techController.findOne);
@@ -38,6 +39,7 @@ router.delete("/relatedTech/:id", relatedTechController.delete);
 
 router.post("/complain", complainController.create);
 router.get("/complain", complainController.findAll);
+router.get("/lastcomplain", complainController.find);
 router.get("/complain/activecount", complainController.countComplain);
 router.get("/complain/count", complainController.countAll);
 router.get("/complain/:id", complainController.findOne);

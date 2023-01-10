@@ -1,21 +1,25 @@
 const complainService = require("../services/complains.service");
+const technicianService = require("../services/techs.service");
 const upload = require("../middleware/complain.upload");
 
 exports.create = (req, res, next) => {
-    upload(req, res, function (err) {
+    upload(req, res, async function (err) {
         if (err) {
             next(err);
 
         } else {
             const path =
                 req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
-
+            
+            let techniciantoAssign = await complainService.RoundRobinAlgorithm();           
+            console.log(techniciantoAssign);
+            
             var model = {
                 user:req.body.user,
                 complainName: req.body.complainName,
                 complainDescription: req.body.complainDescription,
                 complainCategory:req.body.complainCategory,
-                assignedTech:req.body.assignedTech,
+                assignedTech:techniciantoAssign,
                 userAddress:req.body.userAddress,
                 userContact:req.body.userContact,
                 complainImage: path != "" ? "/" + path : "",
@@ -106,6 +110,25 @@ exports.findOne = (req, res, next) => {
     });
 
 };
+exports.find=(req,res,next)=>{
+    var model={
+        pageSize: req.query.pageSize,
+        page: req.query.page,
+    }
+    complainService.getlastComplain((error, results) => {
+        if (error) {
+            return next(error);
+        }
+        else {
+            return res.status(200).send({
+                messege: "Success",
+                data: results,
+            });
+        }
+
+    });
+    
+}
 
 exports.update = (req, res, next) => {
     upload(req, res, function (err) {

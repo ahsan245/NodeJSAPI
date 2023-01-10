@@ -2,6 +2,7 @@ const { response } = require("express");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
 const { complain } = require("../models/complain.model");
 const {user} = require("../models/user.model")
+const tech = require("./techs.service");
 
 async function createComplain(params, callback) {
     if (!params.complainName) {
@@ -95,6 +96,52 @@ async function getComplainById(params, callback) {
 
 
 }
+
+async function getlastComplain() {
+
+    return complain
+        .find({})
+        .sort({_id:-1}).limit(1).exec();
+
+}
+
+async function RoundRobinAlgorithm()
+{
+    let complain = await this.getlastComplain();
+    let technician = await tech.getAllTechs();
+    console.log("complain:",complain);
+    for(var i=0; i < technician.length; i++)
+    {
+        if(complain == null)
+        {
+            console.log("null hai");
+            return technician[0]._id;
+        }
+        else if(complain[0].assignedTech == null)
+        {
+            console.log("assign null hai");
+            return technician[0]._id;
+        }
+        else
+        {
+            if(complain[0].assignedTech.toString() == technician[i]._id.toString())
+            {
+                var count = technician.length -1;
+                var next = i + 1;
+                if(i == count)
+                {
+                    return technician[0]._id;
+                }
+                else
+                {
+                    return technician[next]._id;
+                }
+            }
+        }
+    }
+}
+
+
 async function getComplainCount(callback) {
     complain.countDocuments().then((count) => {
       return callback(null, count);
@@ -162,5 +209,7 @@ module.exports = {
     updateComplain,
     deleteComplain,
     getComplainCount,
-    countComplain
+    countComplain,
+    getlastComplain,
+    RoundRobinAlgorithm
 };
