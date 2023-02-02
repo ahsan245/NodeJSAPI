@@ -1,33 +1,34 @@
+const { user } = require("../models/user.model");
 const userServices = require("../services/users.service");
 
 exports.register = (req, res, next) => {
-    userServices.register(req.body,(error, results) => {
-        if(error){
+    userServices.register(req.body, (error, results) => {
+        if (error) {
             return next(error);
         }
-        else{
-        return res.status(200).send({
+        else {
+            return res.status(200).send({
                 message: "Success",
                 data: results
-        });
-    }
+            });
+        }
     });
 
 };
 
 exports.login = (req, res, next) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
-    userServices.login({email, password}, (error, results) => {
-        if(error){
+    userServices.login({ email, password }, (error, results) => {
+        if (error) {
             return next(error);
         }
-    else{
-        return res.status(200).send({
-            message: "Success",
-            data: results
-        });
-    }
+        else {
+            return res.status(200).send({
+                message: "Success",
+                data: results
+            });
+        }
     });
 };
 
@@ -72,4 +73,33 @@ exports.findOne = (req, res, next) => {
 
     });
 
+};
+
+exports.otpLogin = (req, res, next) => {
+    userServices.createOtp(req.body, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+
+        return res.status(200).send({
+            message: "Success",
+            data: results
+        })
+    });
+
+};
+
+exports.verifyOTP = (req, res, next) => {
+    userServices.verifyOTP(req.body, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+
+        return res.status(200).send({
+            message: "Success",
+            data: results,
+        })
+    });
 };

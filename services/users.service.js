@@ -2,6 +2,12 @@ const { user } = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
+const otpGenerator = require("otp-generator");
+const crypto = require("crypto");
+const key = "otp-secret-key";
+const accountSid = 'AC4d0051d9f25af843b4f7fdfc9a18e6e6'; 
+const authToken = 'a21a3e1644817aeacf408e58abac1398'; 
+const client = require('twilio')(accountSid, authToken); 
 
 
 async function login({ email, password }, callback) {
@@ -10,7 +16,7 @@ async function login({ email, password }, callback) {
     if (userModel != null) {
         if (bcrypt.compareSync(password, userModel.password)) {
             const token = auth.generateAccessToken(userModel.toJSON());
-            return callback(null, {...userModel.toJSON(), token });
+            return callback(null, { ...userModel.toJSON(), token });
         } else {
             return callback({
                 message: "Invalid Email/Password"
@@ -89,10 +95,59 @@ async function getUserbyId(params, callback) {
         );
 }
 
+async function createOtp(params, callback) {
+    const otp = otpGenerator.generate(4, {
+        lowerCaseAlphabets: false,
+        upperCaseAlphabets: false,
+        specialChars: false
+    });
+
+    const ttl = 5 * 60 * 1000;
+    const expires = Date.now() + ttl;
+    const data = `${params.phone}.${otp}.${expires}`;
+    const hash = crypto.createHmac("sha256", key).update(data).digest("hex");
+    const fullHash = `${hash}.${expires}`;
+    const otpp=`${otp}`;
+
+    console.log(`Your OTP is ${otp}`);
+
+    //SEND SMS;
+    client.messages 
+      .create({
+        body:"Your Theek-karo verification code is "+otpp,
+         to: "+92"+params.phone,
+         from:'+16063571913'
+       }) 
+      .then(message => console.log(message)) 
+      .catch(error => console.log(error))
+    return callback(null, fullHash);
+}
+
+async function verifyOTP(params, callback) {
+
+    let [hashValue, expires] = params.hash.split('.');
+    let now = Date.now();
+    if (now > parseInt(expires)) return callback("OTP Expired");
+
+    let data = `${params.phone}.${params.otp}.${expires}`;
+    let newCalculateHash = crypto
+        .createHmac("sha256", key)
+        .update(data)
+        .digest("hex");
+
+    if(newCalculateHash === hashValue){
+        return callback(null,"Success");
+    }
+
+    return callback("Invalied OTP");
+}
+
 
 module.exports = {
     login,
     register,
     getUsers,
-    getUserbyId
+    getUserbyId,
+    createOtp,
+    verifyOTP
 };

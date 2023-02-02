@@ -48,6 +48,8 @@ router.delete("/complain/:id", complainController.delete);
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/login", userController.findAll);
+router.post("/otpLogin", userController.otpLogin);
+router.post("/verifyOTP", userController.verifyOTP);
 router.get("/login/:id", userController.findOne);
 
 
