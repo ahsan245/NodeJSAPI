@@ -526,7 +526,8 @@
         "required":[
           "fullName",
           "email",
-          "password"
+          "password",
+          "contact"
         ],
         "properties":{
           "fullName":{
@@ -536,6 +537,9 @@
             "type":"string"
           },
           "password":{
+            "type":"string"
+          },
+          "contact":{
             "type":"string"
           }
         }

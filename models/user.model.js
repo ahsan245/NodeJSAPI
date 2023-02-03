@@ -15,6 +15,10 @@ const user = mongoose.model(
         password: {
             type: String,
             required: true
+        },
+        contact:{
+            type:String,
+            required:true
         }
     },
     {

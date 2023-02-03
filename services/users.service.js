@@ -45,6 +45,14 @@ async function register(params, callback) {
             message: "Email is already registered"
         });
     }
+    if (!params.contact) {
+        return callback(
+            {
+                message: "Contact Required",
+            },
+            ""
+        );
+    }
 
     const salt = bcrypt.genSaltSync(10);
     params.password = bcrypt.hashSync(params.password, salt);
@@ -68,7 +76,7 @@ async function getUsers(params, callback) {
     let page = (Math.abs(params.page) || 1) - 1;
 
     user
-        .find(condition, "fullName email")
+        .find(condition, "fullName email contact")
         .limit(perPage).skip(perPage * page)
         .then((response) => {
             return callback(null, response);
