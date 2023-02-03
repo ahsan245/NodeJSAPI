@@ -124,7 +124,7 @@ async function createOtp(params, callback) {
     //SEND SMS;
     client.messages 
       .create({
-        body:"Your Theek-karo verification code is "+otpp,
+        body:otpp+" is your Theek-Karo OTP.Do not share it with anyone.",
          to: "+92"+params.phone,
          from:'+16063571913'
        }) 
