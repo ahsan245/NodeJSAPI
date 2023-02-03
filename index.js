@@ -38,8 +38,10 @@ app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 
 
-app.listen(process.env.port ,'0.0.0.0',function(){
-    console.log("Ready to Go!");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
 
 
 
