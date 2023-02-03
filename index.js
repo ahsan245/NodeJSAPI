@@ -5,6 +5,7 @@ const { MONGO_DB_CONFIG } = require("./config/app.config");
 const errors = require("./middleware/errors.js");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express"), swaggerDocument = require("./swagger.json");
+require("dotenv").config();
 
 
 
@@ -18,6 +19,8 @@ mongoose
     .then(
         () => {
             console.log("Database connected");
+            console.log(process.env.KEY);
+
         },
         (error) => {
 

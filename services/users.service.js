@@ -5,8 +5,10 @@ const { MONGO_DB_CONFIG } = require("../config/app.config");
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
 const key = "otp-secret-key";
-const accountSid = 'AC4d0051d9f25af843b4f7fdfc9a18e6e6'; 
-const authToken = 'a21a3e1644817aeacf408e58abac1398'; 
+require("dotenv").config();
+
+const accountSid = process.env.ACCKEY; 
+const authToken = process.env.AUThTOKENKEY; 
 const client = require('twilio')(accountSid, authToken); 
 
 
