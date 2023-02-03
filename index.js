@@ -38,7 +38,7 @@ app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 
 
-app.listen(process.env.port || 4000,function(){
+app.listen(process.env.port ,'0.0.0.0',function(){
     console.log("Ready to Go!");
 
 
