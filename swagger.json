@@ -9,7 +9,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "host": "127.0.0.1:4000",
+    "host": "https://theek-karo-api.herokuapp.com",
     "basePath": "/",
     "tags": [
       {
