@@ -101,7 +101,6 @@ async function getlastComplain() {
 
     return complain
         .find({})
-        .populate("user", "userId fullName contact")
         .sort({_id:-1}).limit(1).exec();
 
 }
