@@ -34,7 +34,7 @@ const complain = mongoose.model(
         },
         userContact:{
             type:String,
-            required:true
+            required:false
         },
         complainImage: {
             type: String,
