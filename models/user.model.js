@@ -22,7 +22,8 @@ const user = mongoose.model(
         },
         userImage: {
             type: String
-        },
+            
+        }
     },
     {
         toJSON: {

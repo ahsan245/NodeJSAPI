@@ -1,35 +1,34 @@
-const { user } = require("../models/user.model");
-const upload = require("../middleware/user.upload");
+const upload = require("../middleware/user.upload")
 const userServices = require("../services/users.service");
 
 exports.register = (req, res, next) => {
-    upload(req,res,function(err)
-    {
-        if(err){
+    upload(req, res, function (err) {
+        if (err) {
             next(err);
         }
-        else{
+        else {
 
             const path =
-            req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
-            var model={
-            fullName:req.body.fullName,
-            email:req.body.email,
-            password:req.body.password,
-            contact:req.body.contact,
-            userImage:path != "" ? "/" + path : ""
+                req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
+
+            var model = {
+                fullName: req.body.fullName,
+                email: req.body.email,
+                password: req.body.password,
+                contact: req.body.contact,
+                userImage: path != "" ? "/" + path : ""
             }
-    userServices.register(model, (error, results) => {
-        if (error) {
-            return next(error);
-        }
-        else {
-            return res.status(200).send({
-                message: "Success",
-                data: results
+            userServices.register(model, (error, results) => {
+                if (error) {
+                    return next(error);
+                }
+                else {
+                    return res.status(200).send({
+                        message: "Success",
+                        data: results
+                    });
+                }
             });
-        }
-    });
         }
 
     });
@@ -38,7 +37,7 @@ exports.register = (req, res, next) => {
 exports.login = (req, res, next) => {
     const { email, password } = req.body;
 
-    userServices.login({ email, password}, (error, results) => {
+    userServices.login({ email, password }, (error, results) => {
         if (error) {
             return next(error);
         }
