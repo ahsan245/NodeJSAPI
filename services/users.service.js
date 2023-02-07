@@ -38,11 +38,7 @@ async function register(params, callback) {
             message: "Email Required!"
         });
     }
-    if (params.userImage === undefined) {
-        return callback({
-            message: "Image Required!"
-        });
-    }
+   
     let isUserExist = await user.findOne({ email: params.email });
 
     if (isUserExist) {

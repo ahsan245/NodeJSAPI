@@ -23,7 +23,7 @@ const user = mongoose.model(
         userImage: {
             type: String
             
-        }
+        },
     },
     {
         toJSON: {
@@ -36,7 +36,6 @@ const user = mongoose.model(
         }
 
     }, {
-        timestamps: true
     })
 );
 
