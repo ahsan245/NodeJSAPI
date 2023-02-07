@@ -33,6 +33,7 @@ async function login({ email, password }, callback) {
 }
 
 async function register(params, callback) {
+    console.log(params.userImage);
     if (params.email === undefined) {
         return callback({
             message: "Email Required!"

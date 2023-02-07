@@ -7,7 +7,6 @@ exports.create = (req, res, next) => {
             next(err);
         }
         else {
-
             const path =
                 req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
@@ -17,6 +16,7 @@ exports.create = (req, res, next) => {
                 password: req.body.password,
                 contact: req.body.contact,
                 userImage: path != "" ? "/" + path : "",
+
             };
             userServices.register(model, (error, results) => {
                 if (error) {
