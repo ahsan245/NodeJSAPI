@@ -82,7 +82,7 @@ async function getComplainById(params, callback) {
 
     complain
         .findById(complainId)
-        .populate("user", "userId fullName contact")
+        .populate("user", "userId fullName email contact")
         .populate("assignedTech", "techId techName")
         .then((response) => {
             
