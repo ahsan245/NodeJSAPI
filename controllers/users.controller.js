@@ -1,7 +1,7 @@
 const upload = require("../middleware/user.upload")
 const userServices = require("../services/users.service");
 
-exports.register = (req, res, next) => {
+exports.create = (req, res, next) => {
     upload(req, res, function (err) {
         if (err) {
             next(err);
@@ -16,8 +16,8 @@ exports.register = (req, res, next) => {
                 email: req.body.email,
                 password: req.body.password,
                 contact: req.body.contact,
-                userImage: path != "" ? "/" + path : ""
-            }
+                userImage: path != "" ? "/" + path : "",
+            };
             userServices.register(model, (error, results) => {
                 if (error) {
                     return next(error);
