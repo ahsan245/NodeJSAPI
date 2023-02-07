@@ -34,6 +34,39 @@ exports.create = (req, res, next) => {
     });
 };
 
+
+exports.update = (req, res, next) => {
+    upload(req, res, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            const path =
+                req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
+            var model = {
+                userId: req.params.id,
+                fullName: req.body.fullName,
+                email: req.body.email,
+                contact:req.body.contact,
+                password:req.body.password,
+
+                userImage: path != "" ? "/" + path : "",
+            };
+
+            userServices.updateUser(model, (error, results) => {
+                if (error) {
+                    return next(error);
+                }
+                else {
+                    return res.status(200).send({
+                        messege: "Success",
+                        data: results,
+                    });
+                }
+            });
+        }
+    });
+};
+
 exports.login = (req, res, next) => {
     const { email, password } = req.body;
 

@@ -46,6 +46,7 @@ router.put("/complain/:id", complainController.update);
 router.delete("/complain/:id", complainController.delete);
 
 router.post("/register", userController.create);
+router.put("/updateUser", userController.update);
 router.post("/login", userController.login);
 router.get("/login", userController.findAll);
 router.post("/otpLogin", userController.otpLogin);

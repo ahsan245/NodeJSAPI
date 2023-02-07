@@ -88,6 +88,24 @@ async function getUsers(params, callback) {
         });
 
 
+}
+
+
+async function updateUser(params, callback) {
+    const userId = params.userId;
+    const salt = bcrypt.genSaltSync(10);
+    params.password = bcrypt.hashSync(params.password, salt);
+
+    user
+        .findByIdAndUpdate(userId, params, { useFindAndModify: false })
+        .then((response) => {
+            if (!response) callback("Not Found User with Id" + userId)
+            else callback(null, response);
+        })
+        .catch((error) => {
+            return callback(error);
+        }
+        );
 
 
 }
@@ -161,5 +179,6 @@ module.exports = {
     getUsers,
     getUserbyId,
     createOtp,
-    verifyOTP
+    verifyOTP,
+    updateUser
 };
