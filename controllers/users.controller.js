@@ -16,6 +16,7 @@ exports.register = (req, res, next) => {
             fullName:req.body.fullName,
             email:req.body.email,
             password:req.body.password,
+            contact:req.body.contact,
             userImage:path != "" ? "/" + path : ""
             }
     userServices.register(model, (error, results) => {
