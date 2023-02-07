@@ -1,5 +1,5 @@
-const upload = require("../middleware/user.upload")
 const userServices = require("../services/users.service");
+const upload = require("../middleware/user.upload")
 
 exports.create = (req, res, next) => {
     upload(req, res, function (err) {
