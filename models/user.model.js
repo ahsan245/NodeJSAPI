@@ -19,7 +19,10 @@ const user = mongoose.model(
         contact:{
             type:String,
             required:true
-        }
+        },
+        userImage: {
+            type: String
+        },
     },
     {
         toJSON: {

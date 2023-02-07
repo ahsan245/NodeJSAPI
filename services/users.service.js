@@ -76,7 +76,7 @@ async function getUsers(params, callback) {
     let page = (Math.abs(params.page) || 1) - 1;
 
     user
-        .find(condition, "fullName email contact")
+        .find(condition, "fullName email contact userImage")
         .limit(perPage).skip(perPage * page)
         .then((response) => {
             return callback(null, response);

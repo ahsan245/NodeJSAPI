@@ -1,8 +1,24 @@
 const { user } = require("../models/user.model");
+const upload = require("../middleware/user.upload");
 const userServices = require("../services/users.service");
 
 exports.register = (req, res, next) => {
-    userServices.register(req.body, (error, results) => {
+    upload(req,res,function(err)
+    {
+        if(err){
+            next(err);
+        }
+        else{
+
+            const path =
+            req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
+            var model={
+            fullName:req.body.fullName,
+            email:req.body.email,
+            password:req.body.password,
+            userImage:path != "" ? "/" + path : ""
+            }
+    userServices.register(model, (error, results) => {
         if (error) {
             return next(error);
         }
@@ -13,7 +29,9 @@ exports.register = (req, res, next) => {
             });
         }
     });
+        }
 
+    });
 };
 
 exports.login = (req, res, next) => {
