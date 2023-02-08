@@ -11,14 +11,14 @@ exports.create = (req, res, next) => {
             const path =
                 req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
             
-            let techniciantoAssign = await complainService.RoundRobinAlgorithm();
+            // let techniciantoAssign = await complainService.RoundRobinAlgorithm();
 
             var model = {
                 user:req.body.user,
                 complainName: req.body.complainName,
                 complainDescription: req.body.complainDescription,
                 complainCategory:req.body.complainCategory,
-                assignedTech:techniciantoAssign,
+                assignedTech:req.body.assignedTech,
                 userAddress:req.body.userAddress,
                 userContact:req.body.userContact,
                 complainImage: path != "" ? "/" + path : "",
