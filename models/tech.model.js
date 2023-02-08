@@ -55,7 +55,7 @@ const tech = mongoose.model(
         toJSON: {
             transform: function (doc, ret) {
                 ret.techId = ret._id.toString();
-                delete ret._id;
+               
                 delete ret.__v;
             }
         }
