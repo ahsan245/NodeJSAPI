@@ -1,5 +1,7 @@
 const userServices = require("../services/users.service");
 const upload = require("../middleware/user.upload")
+require("dotenv").config();
+
 
 exports.create = (req, res, next) => {
     upload(req, res, function (err) {
