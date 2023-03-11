@@ -98,7 +98,7 @@ async function getComplainById(params, callback) {
 }
 async function getComplainsByUserId(userId) {
     try {
-        const complains = await complain.find({ user: userId })
+        const complains = await Complain.find({ user: userId })
             .populate("user", "userId fullName email contact")
             .populate("assignedTech", "techId techName")
             .exec();
@@ -112,6 +112,7 @@ async function getComplainsByUserId(userId) {
         throw new Error("Error retrieving complains for user with id " + userId + ": " + error.message);
     }
 }
+
 
 async function getlastComplain() {
 

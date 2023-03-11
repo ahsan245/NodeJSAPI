@@ -109,22 +109,20 @@ exports.findOne = (req, res, next) => {
     });
 
 };
-exports.getComplainsByUserId = (req, res, next) => {
-    const model = {
-        userId: req.params.userId,
-    };
+exports.getComplainsByUserId = async (req, res, next) => {
+    const userId = req.params.userId;
 
-    complainService.getComplainsByUserId(model, (error, results) => {
-        if (error) {
-            return next(error);
-        } else {
-            return res.status(200).send({
-                message: "Success",
-                data: results,
-            });
-        }
-    });
+    try {
+        const complains = await complainService.getComplainsByUserId(userId);
+        return res.status(200).json({
+            message: "Success",
+            data: complains
+        });
+    } catch (error) {
+        return next(error);
+    }
 };
+
 
 exports.find = (req, res, next) => {
     var model = {
