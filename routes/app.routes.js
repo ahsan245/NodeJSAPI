@@ -39,7 +39,7 @@ router.delete("/relatedTech/:id", relatedTechController.delete);
 router.post("/complain", complainController.create);
 router.get("/complain", complainController.findAll);
 router.get("/lastcomplain", complainController.find);
-router.get("/findbyuserId", complainController.findByUserId);
+router.get("/findbyuserId/:id", complainController.findByUserId);
 router.get("/complain/activecount", complainController.countComplain);
 router.get("/complain/count", complainController.countAll);
 router.get("/complain/:id", complainController.findOne);
