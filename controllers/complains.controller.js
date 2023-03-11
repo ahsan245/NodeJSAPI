@@ -111,7 +111,7 @@ exports.findOne = (req, res, next) => {
 };
 exports.findByUserId = (req, res, next) => {
     const model = {
-        userId: req.params.id,
+        userId: req.params.userId,
     };
 
     complainService.getComplainsByUserId(model, (error, results) => {
