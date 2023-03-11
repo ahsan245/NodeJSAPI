@@ -96,22 +96,20 @@ async function getComplainById(params, callback) {
 
 
 }
-async function getComplainsByUserId(params, callback) {
-    const userId = params.userId;
-
+async function getComplainsByUserId(userId) {
     try {
-        const complains = await complains.find({ user: userId })
+        const complains = await complain.find({ user: userId })
             .populate("user", "userId fullName email contact")
             .populate("assignedTech", "techId techName")
             .exec();
 
         if (!complains.length) {
-            callback("No complains found for user with id " + userId);
-        } else {
-            callback(null, complains);
+            throw new Error("No complains found for user with id " + userId);
         }
+
+        return complains;
     } catch (error) {
-        callback(error);
+        throw new Error("Error retrieving complains for user with id " + userId + ": " + error.message);
     }
 }
 
