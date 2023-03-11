@@ -109,19 +109,21 @@ exports.findOne = (req, res, next) => {
     });
 
 };
-exports.getComplainsByUserId = async (req, res, next) => {
+exports.getComplainsByUserId = (req, res, next) => {
     const userId = req.params.userId;
 
-    try {
-        const complains = await complainService.getComplainsByUserId(userId);
-        return res.status(200).json({
-            message: "Success",
-            data: complains
-        });
-    } catch (error) {
-        return next(error);
-    }
+    complainService.getComplainsByUserId(userId, (error, complains) => {
+        if (error) {
+            return next(error);
+        } else {
+            return res.status(200).send({
+                message: "Success",
+                data: complains,
+            });
+        }
+    });
 };
+
 
 
 exports.find = (req, res, next) => {

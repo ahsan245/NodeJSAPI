@@ -96,9 +96,7 @@ async function getComplainById(params, callback) {
 
 
 }
-async function getComplainsByUserId(params, callback) {
-    const userId = params.userId;
-
+async function getComplainsByUserId(userId, callback) {
     try {
         const complains = await complain.find({ user: userId })
             .populate("user", "userId fullName email contact")
@@ -111,11 +109,9 @@ async function getComplainsByUserId(params, callback) {
             callback(null, complains);
         }
     } catch (error) {
-        console.error(error); // log the error message
         callback(error);
     }
 }
-
 async function getlastComplain() {
 
     return complain
