@@ -100,7 +100,7 @@ async function getComplainsByUserId(params, callback) {
     const userId = params.userId;
 
     try {
-        const complains = await Complain.find({ user: userId })
+        const complains = await complains.find({ user: userId })
             .populate("user", "userId fullName email contact")
             .populate("assignedTech", "techId techName")
             .exec();
