@@ -15,30 +15,35 @@ const complain = mongoose.model(
             type: String,
             required: false
         },
-        complainCategory:{
-            type:String,
-            required:false
+        complainCategory: {
+            type: String,
+            required: false
+        },
+        categoryassigned: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category",
+            required: false
         },
         assignedTech: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tech",
             required: false
         },
-        userAddress:{
-            type:String,
-            required:true
+        userAddress: {
+            type: String,
+            required: true
         },
         complainStatus: {
             type: Boolean,
-            default: false  
+            default: false
         },
-        userContact:{
-            type:String,
-            required:false
+        userContact: {
+            type: String,
+            required: false
         },
         complainImage: {
             type: String,
-            required:false
+            required: false
         }
     },
         {

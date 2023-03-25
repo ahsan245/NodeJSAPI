@@ -13,11 +13,15 @@ exports.create = (req, res, next) => {
 
             let techniciantoAssign = await complainService.RoundRobinAlgorithm();
 
+            // Find the category that matches the complainCategory value
+            const category = await category.findOne({ categoryName: req.body.complainCategory });
+
             var model = {
                 user: req.body.user,
                 complainName: req.body.complainName,
                 complainDescription: req.body.complainDescription,
                 complainCategory: req.body.complainCategory,
+                categoryassigned: category != null ? category._id : null, // Assign the matching category's ID to the new field, or null if no match was found
                 assignedTech: techniciantoAssign,
                 userAddress: req.body.userAddress,
                 userContact: req.body.userContact,
