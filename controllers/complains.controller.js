@@ -1,6 +1,8 @@
 const complainService = require("../services/complains.service");
 const technicianService = require("../services/techs.service");
 const upload = require("../middleware/complain.upload");
+const { category } = require("../models/category.model");
+
 
 exports.create = (req, res, next) => {
     upload(req, res, async function (err) {
