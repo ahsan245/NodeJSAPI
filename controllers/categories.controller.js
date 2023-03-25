@@ -100,6 +100,7 @@ exports.update = (req, res, next) => {
                 categoryName: req.body.categoryName,
                 categoryDescription: req.body.categoryDescription,
                 catergoryImage: path != "" ? "/" + path : "",
+                categoryCheckList: req.body.categoryCheckList,
             };
 
             categoriesService.updateCategory(model, (error, results) => {
