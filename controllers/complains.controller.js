@@ -48,6 +48,7 @@ exports.findAll = (req, res, next) => {
         complainName: req.query.complainName,
         userId: req.query.userId,
         assignedTech: req.query.assignedTech,
+        categoryassigned: req.query.categoryassigned,
         pageSize: req.query.pageSize,
         page: req.query.page,
 

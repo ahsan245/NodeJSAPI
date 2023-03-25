@@ -58,7 +58,7 @@ async function getComplain(params, callback) {
         .find(condition, "complainStatus complainName complainDescription complainCategory userAddress userContact complainImage")
         .populate("user", "userId fullName email contact")
         .populate("assignedTech", "techId techName")
-        .populate("categoryassigned", "categoryId categoryName")
+        .populate("categoryassigned", "categoryId categoryName categoryCheckList")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
