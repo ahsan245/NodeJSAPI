@@ -6,39 +6,34 @@ exports.create = (req, res, next) => {
     upload(req, res, async function (err) {
         if (err) {
             next(err);
-
         } else {
-            const path =
-                req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
+            const imagePath = req.file != undefined ? req.file.path.replace(/\\/g, "/") : "";
 
             let techniciantoAssign = await complainService.RoundRobinAlgorithm();
 
-            // Find the category that matches the complainCategory value
-            const category = await category.findOne({ categoryName: req.body.complainCategory });
+            const cat = await category.findOne({ categoryName: req.body.complainCategory });
 
             var model = {
                 user: req.body.user,
                 complainName: req.body.complainName,
                 complainDescription: req.body.complainDescription,
                 complainCategory: req.body.complainCategory,
-                categoryassigned: category != null ? category._id : null, // Assign the matching category's ID to the new field, or null if no match was found
                 assignedTech: techniciantoAssign,
                 userAddress: req.body.userAddress,
                 userContact: req.body.userContact,
-                complainImage: path != "" ? "/" + path : "",
+                complainImage: imagePath != "" ? "/" + imagePath : "",
+                categoryassigned: cat ? cat._id : null
             };
 
             complainService.createComplain(model, (error, results) => {
                 if (error) {
                     return next(error);
-                }
-                else {
+                } else {
                     return res.status(200).send({
                         messege: "Success",
                         data: results,
                     });
                 }
-
             });
         }
     });
