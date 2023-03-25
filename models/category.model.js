@@ -12,6 +12,7 @@ const category = mongoose.model(
             type: String,
             required: false
         },
+        categoryCheckList: [{ type: String }],
         categoryImage: {
             type: String
         },

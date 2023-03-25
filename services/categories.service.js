@@ -35,9 +35,9 @@ async function getCategories(params, callback) {
     let perPage = Math.abs(params.pageSize) || MONGO_DB_CONFIG.pageSize;
     let page = (Math.abs(params.page) || 1) - 1;
 
-   
+
     category
-        .find(condition, "categoryName categoryImage")
+        .find(condition, "categoryName categoryImage categoryCheckList")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
@@ -51,11 +51,11 @@ async function getCategories(params, callback) {
 
 async function getCategoriesCount(callback) {
     category.countDocuments().then((count) => {
-      return callback(null, count);
+        return callback(null, count);
     }).catch((error) => {
-      return callback(error);
+        return callback(error);
     });
-  }
+}
 
 
 async function getCategoryById(params, callback) {
