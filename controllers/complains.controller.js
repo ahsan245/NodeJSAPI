@@ -24,7 +24,10 @@ exports.create = (req, res, next) => {
                 userAddress: req.body.userAddress,
                 userContact: req.body.userContact,
                 complainImage: imagePath != "" ? "/" + imagePath : "",
-                categoryassigned: cat ? cat._id : null
+                categoryassigned: cat ? cat._id : null,
+                longitude: req.body.longitude,
+                latitude: req.body.latitude
+
             };
 
             complainService.createComplain(model, (error, results) => {
@@ -166,6 +169,8 @@ exports.update = (req, res, next) => {
                 userContact: req.body.userContact,
                 complainStatus: req.body.complainStatus,
                 complainImage: path != "" ? "/" + path : "",
+                longitude: req.body.longitude,
+                latitude: req.body.latitude
             };
 
             complainService.updateComplain(model, (error, results) => {
