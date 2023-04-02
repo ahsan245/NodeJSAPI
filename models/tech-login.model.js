@@ -19,8 +19,7 @@ const techUser = mongoose.model(
         techID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tech",
-            required: false,
-            unique: true
+            required: false
         },
     },
         {

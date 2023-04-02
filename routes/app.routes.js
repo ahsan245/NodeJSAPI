@@ -49,12 +49,12 @@ router.put("/complain/:id", complainController.update);
 router.delete("/complain/:id", complainController.delete);
 
 router.post("/register", userController.create);
-router.post("/registertech", techUserController.create);
+router.post("/registerTech", techUserController.create);
 router.put("/updateUser/:id", userController.update);
 router.post("/login", userController.login);
-router.post("/logintech", techUserController.login);
+router.post("/loginTech", techUserController.login);
 router.get("/login", userController.findAll);
-router.get("/findtech", techUserController.findAll);
+router.get("/findTech", techUserController.findAll);
 router.post("/otpLogin", userController.otpLogin);
 router.post("/verifyOTP", userController.verifyOTP);
 router.get("/login/:id", userController.findOne);

@@ -30,12 +30,12 @@ async function registerTech(params, callback) {
                 message: "Email Required!"
             });
         }
-        let isTechExist = await techUser.findOne({ techID: params.techID });
-        if (isTechExist) {
-            return callback({
-                message: "Technician Account Already Exist"
-            });
-        }
+        // let isTechExist = await techUser.findOne({ techID: params.techID });
+        // if (isTechExist) {
+        //     return callback({
+        //         message: "Technician Account Already Exist"
+        //     });
+        // }
         let isUserExist = await techUser.findOne({ email: params.email });
 
         if (isUserExist) {
