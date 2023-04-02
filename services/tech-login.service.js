@@ -9,7 +9,7 @@ async function loginTech({ email, password }, callback) {
     if (techUserModel != null) {
         if (bcrypt.compareSync(password, techUserModel.password)) {
             const token = auth.generateAccessToken(techUserModel.toJSON());
-            return callback(null, { ...techUserModel.toJSON(), token });
+            return callback(null, { ...techUserModel.toJSON(), token, techID: techUserModel.techID });
         } else {
             return callback({
                 message: "Invalid Email/Password"
