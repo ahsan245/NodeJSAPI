@@ -118,6 +118,8 @@ async function getComplainsByTechId(techId, callback) {
         const complains = await complain.find({ assignedTech: techId })
             .populate("user", "userId fullName email contact")
             .populate("assignedTech", "techId techName")
+            .populate("categoryassigned", "categoryId categoryName categoryCheckList")
+
             .exec();
 
         if (!complains.length) {
