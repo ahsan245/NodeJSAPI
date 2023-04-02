@@ -11,7 +11,6 @@ exports.create = (req, res, next) => {
                 techName: req.body.techName,
                 email: req.body.email,
                 password: req.body.password,
-                techID: req.body.techID
 
             };
             techUserServices.registerTech(model, (error, results) => {

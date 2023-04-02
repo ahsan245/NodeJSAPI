@@ -15,12 +15,7 @@ const techUser = mongoose.model(
         techName: {
             type: String,
             required: true
-        },
-        techID: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Tech",
-            required: false
-        },
+        }
     },
         {
             toJSON: {
