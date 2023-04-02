@@ -128,6 +128,20 @@ exports.getComplainsByUserId = (req, res, next) => {
         }
     });
 };
+exports.getComplainsByTechId = (req, res, next) => {
+    const techId = req.params.techId;
+
+    complainService.getComplainsByTechId(techId, (error, complains) => {
+        if (error) {
+            return next(error);
+        } else {
+            return res.status(200).send({
+                message: "Success",
+                data: complains,
+            });
+        }
+    });
+};
 
 
 

@@ -113,6 +113,22 @@ async function getComplainsByUserId(userId, callback) {
         callback(error);
     }
 }
+async function getComplainsByTechId(techId, callback) {
+    try {
+        const complains = await complain.find({ assignedTech: techId })
+            .populate("user", "userId fullName email contact")
+            .populate("assignedTech", "techId techName")
+            .exec();
+
+        if (!complains.length) {
+            callback("No complains found for user with id " + techId);
+        } else {
+            callback(null, complains);
+        }
+    } catch (error) {
+        callback(error);
+    }
+}
 async function getlastComplain() {
 
     return complain
@@ -220,5 +236,6 @@ module.exports = {
     countComplain,
     getlastComplain,
     RoundRobinAlgorithm,
-    getComplainsByUserId
+    getComplainsByUserId,
+    getComplainsByTechId
 };
