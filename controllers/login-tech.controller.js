@@ -16,6 +16,8 @@ exports.create = (req, res, next) => {
             };
             techUserServices.registerTech(model, (error, results) => {
                 if (error) {
+                    console.log("Error:", error);
+
                     return next(error);
                 }
                 else {
