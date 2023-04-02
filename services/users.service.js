@@ -7,9 +7,9 @@ const crypto = require("crypto");
 const key = "otp-secret-key";
 require("dotenv").config();
 
-const accountSid = process.env.ACCKEY; 
-const authToken = process.env.AUThTOKENKEY; 
-const client = require('twilio')(accountSid, authToken); 
+const accountSid = process.env.ACCKEY;
+const authToken = process.env.AUThTOKENKEY;
+const client = require('twilio')(accountSid, authToken);
 
 
 async function login({ email, password }, callback) {
@@ -39,7 +39,7 @@ async function register(params, callback) {
             message: "Email Required!"
         });
     }
-   
+
     let isUserExist = await user.findOne({ email: params.email });
 
     if (isUserExist) {
@@ -137,19 +137,19 @@ async function createOtp(params, callback) {
     const data = `${params.phone}.${otp}.${expires}`;
     const hash = crypto.createHmac("sha256", key).update(data).digest("hex");
     const fullHash = `${hash}.${expires}`;
-    const otpp=`${otp}`;
+    const otpp = `${otp}`;
 
     console.log(`Your OTP is ${otp}`);
 
     //SEND SMS;
-    client.messages 
-      .create({
-        body:otpp+" is your Theek-Karo OTP. Do not share it with anyone.",
-         to: "+92"+params.phone,
-         from:'+16063571913'
-       }) 
-      .then(message => console.log(message)) 
-      .catch(error => console.log(error))
+    client.messages
+        .create({
+            body: otpp + " is your Theek-Karo OTP. Do not share it with anyone.",
+            to: "+92" + params.phone,
+            from: '+16063571913'
+        })
+        .then(message => console.log(message))
+        .catch(error => console.log(error))
     return callback(null, fullHash);
 }
 
@@ -165,8 +165,8 @@ async function verifyOTP(params, callback) {
         .update(data)
         .digest("hex");
 
-    if(newCalculateHash === hashValue){
-        return callback(null,"Success");
+    if (newCalculateHash === hashValue) {
+        return callback(null, "Success");
     }
 
     return callback("Invalied OTP");

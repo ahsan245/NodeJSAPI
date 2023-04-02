@@ -4,6 +4,7 @@ const userController = require("../controllers/users.controller");
 const sliderController = require("../controllers/slider.controller");
 const relatedTechController = require("../controllers/related-tech.controller");
 const complainController = require("../controllers/complains.controller")
+const techUserController = require("../controllers/login-tech.controller")
 
 const express = require("express");
 const { slider } = require("../models/slider.model");
@@ -48,9 +49,12 @@ router.put("/complain/:id", complainController.update);
 router.delete("/complain/:id", complainController.delete);
 
 router.post("/register", userController.create);
+router.post("/registertech", techUserController.create);
 router.put("/updateUser/:id", userController.update);
 router.post("/login", userController.login);
+router.post("/logintech", techUserController.login);
 router.get("/login", userController.findAll);
+router.get("/findtech", techUserController.findAll);
 router.post("/otpLogin", userController.otpLogin);
 router.post("/verifyOTP", userController.verifyOTP);
 router.get("/login/:id", userController.findOne);
