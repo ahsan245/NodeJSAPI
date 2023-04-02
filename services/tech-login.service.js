@@ -52,6 +52,7 @@ async function registerTech(params, callback) {
             return callback(null, response);
         })
         .catch((error) => {
+            console.log("Error:", error);
             return callback(error);
         });
 }
