@@ -48,8 +48,8 @@ exports.update = (req, res, next) => {
                 userId: req.params.id,
                 fullName: req.body.fullName,
                 email: req.body.email,
-                contact:req.body.contact,
-                password:req.body.password,
+                contact: req.body.contact,
+                password: req.body.password,
 
                 userImage: path != "" ? "/" + path : "",
             };

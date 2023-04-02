@@ -1,34 +1,27 @@
 const techUserServices = require("../services/tech-login.service");
 
 exports.create = (req, res, next) => {
-    upload(req, res, function (err) {
-        if (err) {
-            next(err);
+    var model = {
+        techName: req.body.techName,
+        email: req.body.email,
+        password: req.body.password,
+        techID: req.body.techID
+    };
+
+    techUserServices.registerTech(model, (error, results) => {
+        if (error) {
+            console.log(error);
+            return next(error);
         }
         else {
-
-            var model = {
-                techName: req.body.techName,
-                email: req.body.email,
-                password: req.body.password,
-
-            };
-            techUserServices.registerTech(model, (error, results) => {
-                if (error) {
-                    console.log(error);
-                    return next(error);
-                }
-                else {
-                    return res.status(200).send({
-                        message: "Success",
-                        data: results
-                    });
-                }
+            return res.status(200).send({
+                message: "Success",
+                data: results
             });
         }
-
     });
 };
+
 exports.login = (req, res, next) => {
     const { email, password } = req.body;
 
@@ -46,12 +39,10 @@ exports.login = (req, res, next) => {
 };
 
 exports.findAll = (req, res, next) => {
-
     var model = {
         techName: req.query.techName,
         pageSize: req.query.pageSize,
         page: req.query.page,
-
     };
 
     techUserServices.getTechUsers(model, (error, results) => {

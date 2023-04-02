@@ -29,12 +29,6 @@ async function registerTech(params, callback) {
             message: "Email Required!"
         });
     }
-    // let isTechExist = await techUser.findOne({ techID: params.techID });
-    // if (isTechExist) {
-    //     return callback({
-    //         message: "Technician Account Already Exist"
-    //     });
-    // }
     let isUserExist = await techUser.findOne({ email: params.email });
 
     if (isUserExist) {
@@ -50,17 +44,16 @@ async function registerTech(params, callback) {
     techuserSchema.save()
         .then(result => {
             console.log(result);
-            res.status(201).json({
+            callback(null, {
                 message: "User registered successfully"
             });
         })
         .catch(error => {
             console.log(error); // add this line to print the error message to the console
-            res.status(500).json({
-                error: error
-            });
+            callback(error);
         });
 }
+
 
 async function getTechUsers(params, callback) {
     const techName = params.techName;
@@ -74,6 +67,7 @@ async function getTechUsers(params, callback) {
 
     techUser
         .find(condition, "techName email")
+        .populate("techID", "techId techName techShortDescription techPrice techSalePrice techImage techType techStatus createdAT updatedAt")
         .limit(perPage).skip(perPage * page)
         .then((response) => {
             return callback(null, response);

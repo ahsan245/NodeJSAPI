@@ -13,9 +13,9 @@ require("dotenv").config();
 mongoose.Promise = global.Promise;
 mongoose
     .connect(MONGO_DB_CONFIG.DB, {
-     useNewUrlParser: true,
-     useUnifiedTopology: true,
-})
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(
         () => {
             console.log("Database connected");
@@ -28,19 +28,19 @@ mongoose
         }
     );
 app.use(cors({
-    origin:"*"
+    origin: "*"
 }));
 app.use(express.json());
-app.use("/uploads",express.static("uploads"));
-app.use("/api",require("./routes/app.routes"));
+app.use("/uploads", express.static("uploads"));
+app.use("/api", require("./routes/app.routes"));
 app.use(errors.errorHandler);
-app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
+    console.log(`Our app is running on port ${PORT}`);
 
 
 
