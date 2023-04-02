@@ -48,12 +48,17 @@ async function registerTech(params, callback) {
 
     const techuserSchema = new techUser(params);
     techuserSchema.save()
-        .then((response) => {
-            return callback(null, response);
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                message: "User registered successfully"
+            });
         })
-        .catch((error) => {
-            console.log(error);
-            return callback(error);
+        .catch(error => {
+            console.log(error); // add this line to print the error message to the console
+            res.status(500).json({
+                error: error
+            });
         });
 }
 
