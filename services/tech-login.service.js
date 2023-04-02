@@ -2,7 +2,6 @@ const { techUser } = require("../models/tech-login.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
-const { param } = require("../routes/app.routes");
 
 async function loginTech({ email, password }, callback) {
     const techUserModel = await techUser.findOne({ email });
