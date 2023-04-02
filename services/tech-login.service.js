@@ -4,24 +4,25 @@ const auth = require("../middleware/auth");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
 
 async function loginTech({ email, password }, callback) {
-    const techUserModel = await techUser.findOne({ email });
+    const techUserModel = await techUser.findOne({ email }).populate('techID');
 
     if (techUserModel != null) {
         if (bcrypt.compareSync(password, techUserModel.password)) {
             const token = auth.generateAccessToken(techUserModel.toJSON());
-            const response = { ...techUserModel.toJSON(), token };
-            if (techUserModel.techID) {
-                response.techID = techUserModel.techID;
-            }
+            const response = {
+                ...techUserModel.toJSON(),
+                token,
+                techID: techUserModel.techID._id.toString(),
+            };
             return callback(null, response);
         } else {
             return callback({
-                message: "Invalid Email/Password"
+                message: "Invalid Email/Password",
             });
         }
     } else {
         return callback({
-            message: "Invalid Email/Password"
+            message: "Invalid Email/Password",
         });
     }
 }
