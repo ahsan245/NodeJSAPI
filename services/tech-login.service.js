@@ -9,19 +9,23 @@ async function loginTech({ email, password }, callback) {
     if (techUserModel != null) {
         if (bcrypt.compareSync(password, techUserModel.password)) {
             const token = auth.generateAccessToken(techUserModel.toJSON());
-            return callback(null, { ...techUserModel.toJSON(), token, techID: techUserModel.techID });
+            const response = { ...techUserModel.toJSON(), token };
+            if (techUserModel.techID) {
+                response.techID = techUserModel.techID;
+            }
+            return callback(null, response);
         } else {
             return callback({
                 message: "Invalid Email/Password"
             });
         }
-    }
-    else {
+    } else {
         return callback({
             message: "Invalid Email/Password"
         });
     }
 }
+
 
 async function registerTech(params, callback) {
     if (params.email === undefined) {
