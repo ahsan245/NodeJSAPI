@@ -24,38 +24,38 @@ async function loginTech({ email, password }, callback) {
 }
 
 async function registerTech(params, callback) {
-    if (params.email === undefined) {
-        return callback({
-            message: "Email Required!"
-        });
-    }
-    let isTechExist = await techUser.findOne({ techID: params.techID });
-    if (isTechExist) {
-        return callback({
-            message: "Technician Account Already Exist"
-        });
-    }
-    let isUserExist = await techUser.findOne({ email: params.email });
+    try {
+        if (params.email === undefined) {
+            return callback({
+                message: "Email Required!"
+            });
+        }
+        let isTechExist = await techUser.findOne({ techID: params.techID });
+        if (isTechExist) {
+            return callback({
+                message: "Technician Account Already Exist"
+            });
+        }
+        let isUserExist = await techUser.findOne({ email: params.email });
 
-    if (isUserExist) {
-        return callback({
-            message: "Email is already registered"
-        });
+        if (isUserExist) {
+            return callback({
+                message: "Email is already registered"
+            });
+        }
+
+        const salt = bcrypt.genSaltSync(10);
+        params.password = bcrypt.hashSync(params.password, salt);
+
+        const techuserSchema = new techUser(params);
+        const response = await techuserSchema.save();
+        return callback(null, response);
+    } catch (error) {
+        console.error(error);
+        return callback(error);
     }
-
-    const salt = bcrypt.genSaltSync(10);
-    params.password = bcrypt.hashSync(params.password, salt);
-
-    const techuserSchema = new techUser(params);
-    techuserSchema.save()
-        .then((response) => {
-            return callback(null, response);
-        })
-        .catch((error) => {
-            console.log("Error:", error);
-            return callback(error);
-        });
 }
+
 async function getTechUsers(params, callback) {
     const techName = params.techName;
     var condition = techName ? { techName: { $regex: new RegExp(techName), $options: "i" } }
