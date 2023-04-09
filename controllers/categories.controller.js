@@ -117,6 +117,23 @@ exports.update = (req, res, next) => {
         }
     });
 };
+exports.updateCategoryCheckList = (req, res, next) => {
+    const categoryId = req.params.id;
+    const newCategoryCheckList = req.body.categoryCheckList;
+
+    categoriesService.updateCategoryCheckList(categoryId, newCategoryCheckList)
+        .then((updatedCategory) => {
+            res.status(200).json({
+                message: "Category check list updated successfully",
+                data: updatedCategory
+            });
+        })
+        .catch((error) => {
+            next(error);
+        });
+};
+
+
 
 exports.delete = (req, res, next) => {
 

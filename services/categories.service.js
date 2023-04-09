@@ -93,6 +93,22 @@ async function updateCategory(params, callback) {
 
 
 }
+async function updateCategoryCheckList(categoryId, newCategoryCheckList, callback) {
+    try {
+        const category = await category.findById(categoryId);
+
+        if (!category) {
+            return callback("Category not found");
+        }
+
+        category.categoryCheckList = newCategoryCheckList;
+        const updatedCategory = await category.save();
+
+        return callback(null, updatedCategory);
+    } catch (error) {
+        return callback(error);
+    }
+}
 
 
 
@@ -120,5 +136,6 @@ module.exports = {
     getCategoryById,
     updateCategory,
     deleteCategory,
-    getCategoriesCount
+    getCategoriesCount,
+    updateCategoryCheckList
 };

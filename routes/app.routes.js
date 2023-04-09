@@ -15,7 +15,9 @@ router.get("/category", categoryController.findAll);
 router.get("/category/count", categoryController.countAll);
 router.get("/category/:id", categoryController.findOne);
 router.put("/category/:id", categoryController.update);
+router.put("/categorychecklist/:id", categoryController.updateCategoryCheckList);
 router.delete("/category/:id", categoryController.delete);
+
 
 
 
