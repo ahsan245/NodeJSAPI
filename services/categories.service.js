@@ -37,7 +37,7 @@ async function getCategories(params, callback) {
 
 
     category
-        .find(condition, "categoryName categoryImage categoryCheckList")
+        .find(condition, "categoryName categoryImage categoryCheckList completeCheckList")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {

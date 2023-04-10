@@ -15,6 +15,7 @@ exports.create = (req, res, next) => {
                 categoryDescription: req.body.categoryDescription,
                 categoryImage: path != "" ? "/" + path : "",
                 categoryCheckList: req.body.categoryCheckList,
+                completeCheckList: req.body.completeCheckList,
 
             };
 
@@ -101,6 +102,7 @@ exports.update = (req, res, next) => {
                 categoryDescription: req.body.categoryDescription,
                 catergoryImage: path != "" ? "/" + path : "",
                 categoryCheckList: req.body.categoryCheckList,
+                completeCheckList: req.body.completeCheckList,
             };
 
             categoriesService.updateCategory(model, (error, results) => {
