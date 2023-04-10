@@ -41,6 +41,7 @@ const complain = mongoose.model(
             type: String,
             required: false
         },
+        complainCheckList: [{ type: String }],
         complainImage: {
             type: String,
             required: false
@@ -53,7 +54,7 @@ const complain = mongoose.model(
             type: String,
             required: false
         },
-        complainCheckList: [{ type: String }],
+
 
     },
         {
