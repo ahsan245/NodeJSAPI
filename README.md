@@ -9,3 +9,8 @@ The API provides endpoints for CRUD (Create, Read, Update, Delete) operations on
 The project also includes file upload functionality using the multer middleware.
 The repository includes a detailed README file with instructions on how to run the project locally and test the API endpoints using Postman.
 The project has a MIT license, which means it is open-source and can be used, modified, and distributed by anyone
+The project is using MongoDB as the database, with the Mongoose ORM to interact with it. It also uses JWT (JSON Web Tokens) for authentication and authorization.
+
+The project is structured in a modular way, with different routes and controllers separated into their own files. It also includes error handling middleware and validation using the Joi library.
+
+Overall, it seems to be a basic implementation of a RESTful API using Node.js and MongoDB.
