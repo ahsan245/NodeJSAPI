@@ -1,5 +1,4 @@
-# API
-API for Catergoy
-This is an API for my Final Year Project
-These APIs are rest and you have multiple features in it
-
+Built a Node.js API project using Express.js framework to
+handle requests and responses, integrated MongoDB
+database for storing data, and deployed the project on
+Heroku
