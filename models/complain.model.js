@@ -52,7 +52,9 @@ const complain = mongoose.model(
         latitude: {
             type: String,
             required: false
-        }
+        },
+        complainCheckList: [{ type: String }],
+
     },
         {
             toJSON: {

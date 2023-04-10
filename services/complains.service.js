@@ -55,7 +55,7 @@ async function getComplain(params, callback) {
 
 
     complain
-        .find(condition, "complainStatus complainName complainDescription complainCategory userAddress userContact complainImage longitude latitude")
+        .find(condition, "complainStatus complainName complainDescription complainCategory userAddress userContact complainImage longitude latitude complainCheckList")
         .populate("user", "userId fullName email contact")
         .populate("assignedTech", "techId techName")
         .populate("categoryassigned", "categoryId categoryName categoryCheckList")

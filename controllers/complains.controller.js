@@ -15,6 +15,8 @@ exports.create = (req, res, next) => {
 
             const cat = await category.findOne({ categoryName: req.body.complainCategory });
 
+            const complainCheckList = cat ? cat.categoryCheckList : [];
+
             var model = {
                 user: req.body.user,
                 complainName: req.body.complainName,
@@ -26,7 +28,8 @@ exports.create = (req, res, next) => {
                 complainImage: imagePath != "" ? "/" + imagePath : "",
                 categoryassigned: cat ? cat._id : null,
                 longitude: req.body.longitude,
-                latitude: req.body.latitude
+                latitude: req.body.latitude,
+                complainCheckList: complainCheckList
 
             };
 
@@ -184,7 +187,8 @@ exports.update = (req, res, next) => {
                 complainStatus: req.body.complainStatus,
                 complainImage: path != "" ? "/" + path : "",
                 longitude: req.body.longitude,
-                latitude: req.body.latitude
+                latitude: req.body.latitude,
+                complainCheckList: req.body.complainCheckList,
             };
 
             complainService.updateComplain(model, (error, results) => {
