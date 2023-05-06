@@ -29,7 +29,7 @@ exports.create = (req, res, next) => {
                 categoryassigned: cat ? cat._id : null,
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
-                complainCheckList: complainCheckList
+                complainCheckList: complainCheckList,
 
             };
 
@@ -189,6 +189,8 @@ exports.update = (req, res, next) => {
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
                 complainCheckList: req.body.complainCheckList,
+                completeUpdate: req.body.completeUpdate,
+                techComment: req.body.techComment
             };
 
             complainService.updateComplain(model, (error, results) => {

@@ -54,6 +54,14 @@ const complain = mongoose.model(
             type: String,
             required: false
         },
+        techComment: {
+            type: String,
+            required: false
+        },
+        completeUpdate: {
+            type: Boolean,
+            default: false
+        }
 
 
     },
