@@ -181,11 +181,11 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: "no-reply@theekkaro.tech",
-        pass: "$hEdjWKY1"
+        user: "ahsan23saleem1@gmail.com",
+        pass: "jvqoxndbxxhgtzbj"
     }
 });
-// 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
+//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
 
 function createEmailOtp(params, callback) {
     const otp = otpGenerator.generate(4, {
