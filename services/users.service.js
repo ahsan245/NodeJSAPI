@@ -181,8 +181,8 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: "tubasaleem83@gmail.com",
-        pass: "acbdfgu9"
+        user: "ahsan23saleem1@gmail.com",
+        pass: "acbdfgA3"
     }
 });
 
@@ -203,7 +203,7 @@ function createEmailOtp(params, callback) {
 
     // Send email with OTP
     const mailOptions = {
-        from: "tubasaleem83@gmail.com",
+        from: "ahsan23saleem1@gmail.com",
         to: params.email,
         subject: "Your OTP for Theek-Karo",
         text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
