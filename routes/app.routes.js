@@ -58,6 +58,7 @@ router.post("/loginTech", techUserController.login);
 router.get("/login", userController.findAll);
 router.get("/findTech", techUserController.findAll);
 router.post("/otpLogin", userController.otpLogin);
+router.post("/otpEmailLogin", userController.otpEmailLogin);
 router.post("/verifyOTP", userController.verifyOTP);
 router.get("/login/:id", userController.findOne);
 

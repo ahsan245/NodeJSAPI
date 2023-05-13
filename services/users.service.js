@@ -4,12 +4,15 @@ const auth = require("../middleware/auth");
 const { MONGO_DB_CONFIG } = require("../config/app.config");
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 const key = "otp-secret-key";
 require("dotenv").config();
 
 const accountSid = process.env.ACCKEY;
 const authToken = process.env.AUThTOKENKEY;
 const client = require('twilio')(accountSid, authToken);
+
+
 
 
 async function login({ email, password }, callback) {
@@ -153,6 +156,7 @@ async function createOtp(params, callback) {
     return callback(null, fullHash);
 }
 
+
 async function verifyOTP(params, callback) {
 
     let [hashValue, expires] = params.hash.split('.');
@@ -172,6 +176,50 @@ async function verifyOTP(params, callback) {
     return callback("Invalied OTP");
 }
 
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+        user: "tubasaleem83@gmail.com",
+        pass: "acbdfgu9"
+    }
+});
+
+function createEmailOtp(params, callback) {
+    const otp = otpGenerator.generate(4, {
+        lowerCaseAlphabets: false,
+        upperCaseAlphabets: false,
+        specialChars: false
+    });
+
+    const ttl = 5 * 60 * 1000;
+    const expires = Date.now() + ttl;
+    const data = `${params.email}.${otp}.${expires}`;
+    const hash = crypto.createHmac("sha256", key).update(data).digest("hex");
+    const fullHash = `${hash}.${expires}`;
+
+    console.log(`Your OTP is ${otp}`);
+
+    // Send email with OTP
+    const mailOptions = {
+        from: "tubasaleem83@gmail.com",
+        to: params.email,
+        subject: "Your OTP for Theek-Karo",
+        text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return callback(error);
+        } else {
+            console.log(`OTP email sent to ${params.email}`);
+            return callback(null, fullHash);
+        }
+    });
+}
+
 
 module.exports = {
     login,
@@ -180,5 +228,6 @@ module.exports = {
     getUserbyId,
     createOtp,
     verifyOTP,
-    updateUser
+    updateUser,
+    createEmailOtp
 };
