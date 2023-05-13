@@ -177,15 +177,14 @@ async function verifyOTP(params, callback) {
 }
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp.theekkaro.tech",
     port: 587,
     secure: false,
     auth: {
-        user: "ahsan23saleem1@gmail.com",
-        pass: "jvqoxndbxxhgtzbj"
+        user: "no-reply@theekkaro.tech",
+        pass: "B^#DHZY1"
     }
 });
-//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
 
 function createEmailOtp(params, callback) {
     const otp = otpGenerator.generate(4, {
