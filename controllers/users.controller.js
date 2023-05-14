@@ -172,3 +172,17 @@ exports.otpEmailLogin = (req, res, next) => {
     });
 
 };
+
+exports.verifyEmailOTP = (req, res, next) => {
+    userServices.verifyEmailOTP(req.body, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+
+        return res.status(200).send({
+            message: "Success",
+            data: results,
+        })
+    });
+};
