@@ -71,6 +71,29 @@ async function register(params, callback) {
             return callback(error);
         });
 }
+
+async function resetPassword(email, password, callback) {
+    const userModel = await user.findOne({ email });
+
+    if (userModel != null) {
+        const salt = bcrypt.genSaltSync(10);
+        userModel.password = bcrypt.hashSync(password, salt);
+        userModel.save()
+            .then((response) => {
+                return callback(null, response);
+            })
+            .catch((error) => {
+                return callback(error);
+            });
+    }
+    else {
+        return callback({
+            message: "User not found"
+        });
+    }
+}
+
+
 async function getUsers(params, callback) {
     const fullName = params.fullName;
     var condition = fullName ? { fullName: { $regex: new RegExp(fullName), $options: "i" } }
@@ -243,6 +266,7 @@ async function verifyEmailOTP(params, callback) {
 module.exports = {
     login,
     register,
+    resetPassword,
     getUsers,
     getUserbyId,
     createOtp,

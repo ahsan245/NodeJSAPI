@@ -61,6 +61,7 @@ router.post("/otpLogin", userController.otpLogin);
 router.post("/verifyOTP", userController.verifyOTP);
 router.post("/otpEmailLogin", userController.otpEmailLogin);
 router.post("/verifyEmailOTP", userController.verifyEmailOTP);
+router.post("/resetpassword", userController.resetPassword);
 
 
 router.get("/login/:id", userController.findOne);

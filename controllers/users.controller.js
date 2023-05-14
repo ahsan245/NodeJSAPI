@@ -84,6 +84,19 @@ exports.login = (req, res, next) => {
         }
     });
 };
+exports.resetPassword = (req, res, next) => {
+    const { email, password } = req.body;
+
+    userServices.resetPassword(email, password, (error, result) => {
+        if (error) {
+            return next(error);
+        }
+        return res.status(200).send({
+            message: "Success",
+            data: result,
+        });
+    });
+};
 
 
 exports.findAll = (req, res, next) => {
