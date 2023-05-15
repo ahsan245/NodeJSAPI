@@ -200,12 +200,12 @@ async function verifyOTP(params, callback) {
 }
 
 const transporter = nodemailer.createTransport({
-    host: "localhost",
-    port: 25,
+    host: "smtp.theekkaro.tech	",
+    port: 587,
     secure: false,
     auth: {
-        user: "no-reply@theekkaro.me",
-        pass: "acbdfg12"
+        user: "no-reply@theekkaro.tech",
+        pass: "pyYDMVEF4"
     }
 });
 
@@ -226,7 +226,7 @@ function createEmailOtp(params, callback) {
 
     // Send email with OTP
     const mailOptions = {
-        from: "no-reply@theekkaro.me",
+        from: "no-reply@theekkaro.tech",
         to: params.email,
         subject: "Your OTP for Theek-Karo",
         text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
