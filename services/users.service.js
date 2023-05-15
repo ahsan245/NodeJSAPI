@@ -200,12 +200,12 @@ async function verifyOTP(params, callback) {
 }
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+    host: "no-reply@theekkaro.me",
+    port: 25,
     secure: false,
     auth: {
-        user: "ahsan23saleem1@gmail.com",
-        pass: "jvqoxndbxxhgtzbj"
+        user: "no-reply@theekkaro.me",
+        pass: "hvzo-wgfr-bsiv-ozmk"
     }
 });
 
