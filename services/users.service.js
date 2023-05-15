@@ -205,7 +205,7 @@ const transporter = nodemailer.createTransport({
     secure: false,
     auth: {
         user: "no-reply@theekkaro.me",
-        pass: "hvzo-wgfr-bsiv-ozmk"
+        pass: "acbdfg12"
     }
 });
 
