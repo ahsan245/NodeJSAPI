@@ -200,7 +200,7 @@ async function verifyOTP(params, callback) {
 }
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.theekkaro.tech	",
+    host: "smtp.theekkaro.tech",
     port: 587,
     secure: false,
     auth: {
