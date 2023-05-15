@@ -226,7 +226,7 @@ function createEmailOtp(params, callback) {
 
     // Send email with OTP
     const mailOptions = {
-        from: "Theek Karo",
+        from: "no-reply@theekkaro.tech",
         to: params.email,
         subject: "Your OTP for Theek-Karo",
         text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
