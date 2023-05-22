@@ -61,6 +61,10 @@ const complain = mongoose.model(
         completeUpdate: {
             type: Boolean,
             default: false
+        },
+        refBill: {
+            type: String,
+            required: false
         }
 
 

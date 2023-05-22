@@ -30,6 +30,7 @@ exports.create = (req, res, next) => {
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
                 complainCheckList: complainCheckList,
+                refBill: req.body.refBill,
 
             };
 
@@ -190,7 +191,8 @@ exports.update = (req, res, next) => {
                 latitude: req.body.latitude,
                 complainCheckList: req.body.complainCheckList,
                 completeUpdate: req.body.completeUpdate,
-                techComment: req.body.techComment
+                techComment: req.body.techComment,
+                refBill: req.body.refBill
             };
 
             complainService.updateComplain(model, (error, results) => {
