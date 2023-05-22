@@ -65,7 +65,11 @@ const complain = mongoose.model(
         refBill: {
             type: String,
             required: false
-        }
+        },
+        paymentStatus: {
+            type: Boolean,
+            default: false
+        },
 
 
     },

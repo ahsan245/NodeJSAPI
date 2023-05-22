@@ -32,6 +32,7 @@ exports.create = (req, res, next) => {
                 complainCheckList: complainCheckList,
                 refBill: req.body.refBill,
 
+
             };
 
             complainService.createComplain(model, (error, results) => {
@@ -186,13 +187,14 @@ exports.update = (req, res, next) => {
                 userAddress: req.body.userAddress,
                 userContact: req.body.userContact,
                 complainStatus: req.body.complainStatus,
+                refBill: req.body.refBill,
                 complainImage: path != "" ? "/" + path : "",
                 longitude: req.body.longitude,
                 latitude: req.body.latitude,
                 complainCheckList: req.body.complainCheckList,
                 completeUpdate: req.body.completeUpdate,
                 techComment: req.body.techComment,
-                refBill: req.body.refBill
+                paymentStatus: req.body.paymentStatus
             };
 
             complainService.updateComplain(model, (error, results) => {
