@@ -70,6 +70,10 @@ const complain = mongoose.model(
             type: Boolean,
             default: false
         },
+        billAmount: {
+            type: String,
+            required: false
+        }
 
 
     },
