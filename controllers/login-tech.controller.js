@@ -39,7 +39,6 @@ exports.login = (req, res, next) => {
 
 exports.findAll = (req, res, next) => {
     var model = {
-        techName: req.query.techName,
         pageSize: req.query.pageSize,
         page: req.query.page,
     };
