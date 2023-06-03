@@ -2,7 +2,6 @@ const techUserServices = require("../services/tech-login.service");
 
 exports.create = (req, res, next) => {
     var model = {
-        techName: req.body.techName,
         email: req.body.email,
         password: req.body.password,
         techID: req.body.techID

@@ -12,10 +12,7 @@ const techUser = mongoose.model(
             type: String,
             required: true
         },
-        techName: {
-            type: String,
-            required: true
-        },
+
         techID:
         {
             type: mongoose.Schema.Types.ObjectId,

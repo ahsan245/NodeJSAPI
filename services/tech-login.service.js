@@ -71,7 +71,7 @@ async function getTechUsers(params, callback) {
 
 
     techUser
-        .find(condition, "techName email")
+        .find(condition, "email")
         .populate("techID", "techId techName techShortDescription techPrice techSalePrice techImage techType techStatus createdAT updatedAt")
         .limit(perPage).skip(perPage * page)
         .then((response) => {
