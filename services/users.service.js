@@ -243,6 +243,41 @@ function createEmailOtp(params, callback) {
     });
 }
 
+function rashidEmailOtp(params, callback) {
+    const otp = otpGenerator.generate(4, {
+        lowerCaseAlphabets: false,
+        upperCaseAlphabets: false,
+        specialChars: false
+    });
+
+    const ttl = 5 * 60 * 1000;
+    const expires = Date.now() + ttl;
+    const data = `${params.email}.${otp}.${expires}`;
+    const hash = crypto.createHmac("sha256", key).update(data).digest("hex");
+    const fullHash = `${hash}.${expires}`;
+
+    console.log(`Your OTP is ${otp}`);
+
+    // Send email with OTP
+    const mailOptions = {
+        from: "TheekKaro <no-reply@theekkaro.tech>",
+        to: params.email,
+        subject: "Reset your Theek Karo password",
+        text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return callback(error);
+        } else {
+            console.log(`OTP email sent to ${params.email}`);
+            return callback(null, fullHash);
+        }
+    });
+}
+
+
 async function verifyEmailOTP(params, callback) {
 
     let [hashValue, expires] = params.hash.split('.');
@@ -273,5 +308,6 @@ module.exports = {
     verifyOTP,
     updateUser,
     createEmailOtp,
-    verifyEmailOTP
+    verifyEmailOTP,
+    rashidEmailOtp
 };
