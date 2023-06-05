@@ -260,10 +260,10 @@ function rashidEmailOtp(params, callback) {
 
     // Send email with OTP
     const mailOptions = {
-        from: "TheekKaro <no-reply@theekkaro.tech>",
+        from: "KIET-RIDE-SHARING-APP <no-reply@theekkaro.tech>",
         to: params.email,
-        subject: "Reset your Theek Karo password",
-        text: `${otp} is your Theek-Karo OTP. Do not share it with anyone.`
+        subject: "Reset your KIET RIDE SHARING Ap password",
+        text: `${otp} is your KIET RIDE SHARING App OTP. Do not share it with anyone.`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
