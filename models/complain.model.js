@@ -73,6 +73,10 @@ const complain = mongoose.model(
         billAmount: {
             type: String,
             required: false
+        },
+        startComplain: {
+            type: Boolean,
+            default: false
         }
 
 
