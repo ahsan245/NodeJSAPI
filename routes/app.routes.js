@@ -63,8 +63,7 @@ router.post("/otpEmailLogin", userController.otpEmailLogin);
 router.post("/rashidEmailLogin", userController.rashidEmailLogin);
 router.post("/verifyEmailOTP", userController.verifyEmailOTP);
 router.post("/resetpassword", userController.resetPassword);
-
-
+router.post("/farzamEmailLogin", userController.otpEmailLoginFarzam);
 router.get("/login/:id", userController.findOne);
 
 

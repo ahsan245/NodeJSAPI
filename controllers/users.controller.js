@@ -186,6 +186,21 @@ exports.otpEmailLogin = (req, res, next) => {
 
 };
 
+
+exports.otpEmailLoginFarzam = (req, res, next) => {
+    userServices.farzamcreateEmailOtp(req.body, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+
+        return res.status(200).send({
+            message: "Success",
+            data: results
+        })
+    });
+
+};
 exports.rashidEmailLogin = (req, res, next) => {
     userServices.rashidEmailOtp(req.body, (error, results) => {
         if (error) {

@@ -209,6 +209,16 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const farzamtransporter = nodemailer.createTransport({
+    host: " smtp.gmail.com",
+    port: 25,
+    secure: false,
+    auth: {
+        user: "workstudioltd@gmail.com",
+        pass: "iukahentwjswdtku"
+    }
+});
+
 function createEmailOtp(params, callback) {
     const otp = otpGenerator.generate(4, {
         lowerCaseAlphabets: false,
@@ -233,6 +243,41 @@ function createEmailOtp(params, callback) {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return callback(error);
+        } else {
+            console.log(`OTP email sent to ${params.email}`);
+            return callback(null, fullHash);
+        }
+    });
+}
+
+
+function farzamcreateEmailOtp(params, callback) {
+    const otp = otpGenerator.generate(4, {
+        lowerCaseAlphabets: false,
+        upperCaseAlphabets: false,
+        specialChars: false
+    });
+
+    const ttl = 5 * 60 * 1000;
+    const expires = Date.now() + ttl;
+    const data = `${params.email}.${otp}.${expires}`;
+    const hash = crypto.createHmac("sha256", key).update(data).digest("hex");
+    const fullHash = `${hash}.${expires}`;
+
+    console.log(`Your OTP is ${otp}`);
+
+    // Send email with OTP
+    const mailOptions = {
+        from: "WorkStudio <workstudioltd@gmail.com>",
+        to: params.email,
+        subject: "Reset your WorkStudio password",
+        text: `${otp} is your WorkStudio OTP. Do not share it with anyone.`
+    };
+
+    farzamtransporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log(error);
             return callback(error);
@@ -309,5 +354,6 @@ module.exports = {
     updateUser,
     createEmailOtp,
     verifyEmailOTP,
-    rashidEmailOtp
+    rashidEmailOtp,
+    farzamcreateEmailOtp
 };
