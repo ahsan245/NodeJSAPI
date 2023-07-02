@@ -25,8 +25,11 @@ async function createComplain(params, callback) {
     model
         .save()
         .then((response) => {
-            savedComplaint.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            savedComplaint.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            const formattedDate = savedComplaint.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const formattedTime = savedComplaint.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            console.log("Complaint saved:", savedComplaint);
+            console.log("Complaint creation date:", formattedDate);
+            console.log("Complaint creation time:", formattedTime);
             return callback(null, response);
 
         })
