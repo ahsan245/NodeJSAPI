@@ -55,31 +55,19 @@ async function getComplain(params, callback) {
 
 
     complain
-        .find(condition, "creationDate complainCheckList complainStatus complainName complainDescription complainCategory userAddress userContact complainImage longitude latitude completeUpdate techComment refBill paymentStatus billAmount startComplain createdAt")
+        .find(condition, "complainCheckList complainStatus complainName complainDescription complainCategory userAddress userContact complainImage longitude latitude completeUpdate techComment refBill paymentStatus billAmount startComplain createdAt")
         .populate("user", "userId fullName email contact")
         .populate("assignedTech", "techId techName")
         .populate("categoryassigned", "categoryId categoryName categoryCheckList")
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
-            response.forEach((complain) => {
+            response.forEach(complain => {
                 if (!complain.assignedTech || complain.assignedTech === "") {
                     complain.complainStatus = false;
                 } else {
                     complain.complainStatus = true;
                 }
-                const formattedDate = complain.createdAt.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                });
-                const formattedTime = complain.createdAt.toLocaleTimeString("en-US", {
-                    hour: "numeric",
-                    minute: "numeric",
-                    second: "numeric",
-                });
-                complain.creationDate = formattedDate;
-                complain.creationTime = formattedTime;
             });
 
 
