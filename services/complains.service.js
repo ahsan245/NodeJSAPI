@@ -80,8 +80,8 @@ async function getComplain(params, callback) {
                 }
             });
 
-            const formattedDate = response.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            const formattedTime = response.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            const formattedDate = complain.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const formattedTime = complain.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
             console.log("Complaint saved:", response);
             console.log("Complaint creation date:", formattedDate);
             console.log("Complaint creation time:", formattedTime);
