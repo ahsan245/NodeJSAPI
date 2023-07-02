@@ -72,6 +72,7 @@ async function getComplain(params, callback) {
         .limit(perPage)
         .skip(perPage * page)
         .then((response) => {
+
             response.forEach(complain => {
                 if (!complain.assignedTech || complain.assignedTech === "") {
                     complain.complainStatus = false;
@@ -79,6 +80,17 @@ async function getComplain(params, callback) {
                     complain.complainStatus = true;
                 }
             });
+
+            const formattedDate = response.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const formattedTime = response.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+            console.log("Complaint saved:", response);
+            console.log("Complaint creation date:", formattedDate);
+            console.log("Complaint creation time:", formattedTime);
+            response = {
+                complain: response,
+                creationDate: formattedDate,
+                creationTime: formattedTime
+            };
             return callback(null, response);
         })
         .catch((error) => {
