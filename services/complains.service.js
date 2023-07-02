@@ -30,6 +30,11 @@ async function createComplain(params, callback) {
             console.log("Complaint saved:", response);
             console.log("Complaint creation date:", formattedDate);
             console.log("Complaint creation time:", formattedTime);
+            response = {
+                complain: response,
+                creationDate: formattedDate,
+                creationTime: formattedTime
+            };
             return callback(null, response);
 
         })
