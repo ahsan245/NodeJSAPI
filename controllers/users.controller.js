@@ -54,8 +54,6 @@ exports.update = (req, res, next) => {
 
 
             };
-            print(userImage)
-
             userServices.updateUser(model, (error, results) => {
                 if (error) {
                     return next(error);
