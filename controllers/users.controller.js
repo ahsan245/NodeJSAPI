@@ -50,9 +50,11 @@ exports.update = (req, res, next) => {
                 email: req.body.email,
                 contact: req.body.contact,
                 password: req.body.password,
-
                 userImage: path != "" ? "/" + path : "",
+
+
             };
+            print(userImage)
 
             userServices.updateUser(model, (error, results) => {
                 if (error) {
