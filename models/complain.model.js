@@ -80,10 +80,7 @@ const complain = mongoose.model(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            get: function () {
-                return this.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) + ' ' + this.createdAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
-            }
+            default: Date.now
         }
 
 
