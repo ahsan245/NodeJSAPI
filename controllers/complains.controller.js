@@ -199,6 +199,7 @@ exports.update = (req, res, next) => {
                 paymentStatus: req.body.paymentStatus,
                 billAmount: req.body.billAmount,
                 startComplain: req.body.startComplain
+
             };
 
             complainService.updateComplain(model, (error, results) => {
