@@ -119,8 +119,7 @@ async function getUsers(params, callback) {
 
 async function updateUser(params, callback) {
     const userId = params.userId;
-    const salt = bcrypt.genSaltSync(10);
-    params.password = bcrypt.hashSync(params.password, salt);
+
 
     user
         .findByIdAndUpdate(userId, params, { useFindAndModify: false })
