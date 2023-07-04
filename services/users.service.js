@@ -6,6 +6,7 @@ const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { param } = require("../routes/app.routes");
+const { response } = require("express");
 const key = "otp-secret-key";
 require("dotenv").config();
 
@@ -265,7 +266,7 @@ function createComplainMail(params, callback) {
             return callback(error);
         } else {
             console.log(`Mail Send to  ${params.email}`);
-            return callback(null, fullHash);
+            return callback(null, response);
         }
     });
 }
