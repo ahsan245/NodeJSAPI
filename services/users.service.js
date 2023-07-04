@@ -5,6 +5,7 @@ const { MONGO_DB_CONFIG } = require("../config/app.config");
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const { param } = require("../routes/app.routes");
 const key = "otp-secret-key";
 require("dotenv").config();
 
@@ -239,7 +240,7 @@ function createComplainMail(params, callback) {
         subject: `Complaint Launched with Tracking ID: ${params.complainId}`,
         html: `
           <div style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px;">
-            <h2 style="color: #555555;">Dear Customer,</h2>
+            <h2 style="color: #555555;">Dear ${params.fullName},</h2>
             <p style="color: #555555;">
               You have successfully launched a complaint for <strong>${params.complainName}</strong>.
               Our team is currently working on it and we will keep you updated on the progress.
