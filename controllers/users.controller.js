@@ -170,6 +170,20 @@ exports.verifyOTP = (req, res, next) => {
     });
 };
 
+exports.sendEmail = (req, res, next) => {
+    userServices.createComplainMail(req.body, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+
+        return res.status(200).send({
+            message: "Success",
+            data: results
+        })
+    });
+
+};
 
 exports.otpEmailLogin = (req, res, next) => {
     userServices.createEmailOtp(req.body, (error, results) => {

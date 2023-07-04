@@ -66,6 +66,7 @@ router.post("/resetpassword", userController.resetPassword);
 router.post("/farzamEmailLogin", userController.otpEmailLoginFarzam);
 router.get("/login/:id", userController.findOne);
 
+router.post("/complainMail", userController.sendEmail);
 
 
 module.exports = router;

@@ -119,13 +119,15 @@ async function getUsers(params, callback) {
 
 async function updateUser(params, callback) {
     const userId = params.userId;
-
-
     user
         .findByIdAndUpdate(userId, params, { useFindAndModify: false })
         .then((response) => {
-            if (!response) callback("Not Found User with Id" + userId)
-            else callback(null, response);
+            if (!response) {
+                callback("Not Found User with Id" + userId)
+            }
+            else {
+                callback(null, response);
+            }
         })
         .catch((error) => {
             return callback(error);
@@ -208,6 +210,16 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const complainTransporter = nodemailer.createTransport({
+    host: "us2.smtp.mailhostbox.com",
+    port: 25,
+    secure: false,
+    auth: {
+        user: "info@theekkaro.tech",
+        pass: "s^hOcrKXc8"
+    }
+});
+
 const farzamtransporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 25,
@@ -217,6 +229,46 @@ const farzamtransporter = nodemailer.createTransport({
         pass: "iukahentwjswdtku"
     }
 });
+
+function createComplainMail(params, callback) {
+
+    // Send email with OTP
+    const mailOptions = {
+        from: 'TheekKaro <info@theekkaro.tech>',
+        to: params.email,
+        subject: `Complaint Launched with Tracking ID: ${params.complainId}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px;">
+            <h2 style="color: #555555;">Dear Customer,</h2>
+            <p style="color: #555555;">
+              You have successfully launched a complaint for <strong>${params.complainName}</strong>.
+              Our team is currently working on it and we will keep you updated on the progress.
+            </p>
+            <p style="color: #555555;">
+              Assigned Technician: <strong>${params.techName}</strong>
+            </p>
+            <p style="color: #555555;">
+              If you have any further questions or concerns, please feel free to contact us.
+            </p>
+            <p style="color: #555555;">Thank you for choosing TheekKaro.</p>
+            <p style="color: #555555;">Best regards,</p>
+            <p style="color: #555555;">TheekKaro Team</p>
+          </div>
+        `,
+    };
+
+
+    complainTransporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return callback(error);
+        } else {
+            console.log(`Mail Send to  ${params.email}`);
+            return callback(null, fullHash);
+        }
+    });
+}
+
 
 function createEmailOtp(params, callback) {
     const otp = otpGenerator.generate(4, {
@@ -354,5 +406,6 @@ module.exports = {
     createEmailOtp,
     verifyEmailOTP,
     rashidEmailOtp,
-    farzamcreateEmailOtp
+    farzamcreateEmailOtp,
+    createComplainMail
 };
