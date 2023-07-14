@@ -125,17 +125,15 @@ exports.findOne = (req, res, next) => {
 exports.getComplainsByUserId = (req, res, next) => {
     const userId = req.params.userId;
 
-    auth.authenticationToken(req, res, () => {
-        complainService.getComplainsByUserId(userId, (error, complains) => {
-            if (error) {
-                return next(error);
-            } else {
-                return res.status(200).send({
-                    message: "Success",
-                    data: complains,
-                });
-            }
-        });
+    complainService.getComplainsByUserId(userId, (error, complains) => {
+        if (error) {
+            return next(error);
+        } else {
+            return res.status(200).send({
+                message: "Success",
+                data: complains,
+            });
+        }
     });
 };
 exports.getComplainsByTechId = (req, res, next) => {
