@@ -2,6 +2,7 @@ const complainService = require("../services/complains.service");
 const technicianService = require("../services/techs.service");
 const upload = require("../middleware/complain.upload");
 const { category } = require("../models/category.model");
+const auth = require("../middleware/auth");
 
 
 exports.create = (req, res, next) => {
@@ -124,15 +125,17 @@ exports.findOne = (req, res, next) => {
 exports.getComplainsByUserId = (req, res, next) => {
     const userId = req.params.userId;
 
-    complainService.getComplainsByUserId(userId, (error, complains) => {
-        if (error) {
-            return next(error);
-        } else {
-            return res.status(200).send({
-                message: "Success",
-                data: complains,
-            });
-        }
+    auth.authenticationToken(req, res, () => {
+        complainService.getComplainsByUserId(userId, (error, complains) => {
+            if (error) {
+                return next(error);
+            } else {
+                return res.status(200).send({
+                    message: "Success",
+                    data: complains,
+                });
+            }
+        });
     });
 };
 exports.getComplainsByTechId = (req, res, next) => {
